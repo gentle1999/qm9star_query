@@ -79,7 +79,7 @@ def get_snapshot_hash_token(snapshot: Snapshot):
             "atoms",
             "bonds",
             "formal_charges",
-            "formal_spins",
+            "formal_num_radicals",
             "qm_software",
             "qm_software_version",
             "basis",
@@ -88,36 +88,49 @@ def get_snapshot_hash_token(snapshot: Snapshot):
             "solvent_model",
             "solvent",
             "temperature",
-            "is_TS",
-            "is_optimized",
-            "is_error",
         }
     )
     return hashlib.sha256(pattern.encode("utf-8")).hexdigest()
 
 
-def recover_rdmol_from_snapshot(snapshot: Snapshot) -> Chem.Mol:
+def recover_rdmol(
+    coords: List[List[float]],
+    atoms: List[str],
+    bonds: List[List[int]],
+    formal_charges: List[int],
+    formal_num_radicals: List[int],
+) -> Chem.Mol:
     xyz_block = (
-        f"{len(snapshot.coords)}\n"
+        f"{len(coords)}\n"
         + "\n"
         + "\n".join(
             [
                 f"{Chem.Atom(atom).GetSymbol():10s}{x:10.5f}{y:10.5f}{z:10.5f}"
-                for atom, (x, y, z) in zip(snapshot.atoms, snapshot.coords)
+                for atom, (x, y, z) in zip(atoms, coords)
             ]
         )
     )
     rdmol = Chem.RWMol(Chem.MolFromXYZBlock(xyz_block))
-    for bond_start, bond_end, bond_order in snapshot.bonds:
+    for bond_start, bond_end, bond_order in bonds:
         rdmol.AddBond(bond_start, bond_end, bond_list[bond_order])
     for atom, charge, spin in zip(
-        rdmol.GetAtoms(), snapshot.formal_charges, snapshot.formal_spins
+        rdmol.GetAtoms(), formal_charges, formal_num_radicals
     ):
         atom.SetFormalCharge(charge)
         atom.SetNumRadicalElectrons(spin)
     rdmol = rdmol.GetMol()
     Chem.SanitizeMol(rdmol)
     return rdmol
+
+
+def recover_rdmol_from_snapshot(snapshot: Snapshot) -> Chem.Mol:
+    return recover_rdmol(
+        coords=snapshot.coords,
+        atoms=snapshot.atoms,
+        bonds=snapshot.bonds,
+        formal_charges=snapshot.formal_charges,
+        formal_num_radicals=snapshot.formal_num_radicals,
+    )
 
 
 def smiles_to_formula_dict(smi: str):

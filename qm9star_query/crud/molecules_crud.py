@@ -83,8 +83,8 @@ def get_molecules_by_conditions(
                     getattr(Formula, numeric_filter.column) >= numeric_filter.min
                 ).where(getattr(Formula, numeric_filter.column) <= numeric_filter.max)
             if numeric_filter.column in (
-                "atom_number",
                 "total_multiplicity",
+                "total_charge",
                 "qed",
                 "logp",
             ):
@@ -111,7 +111,7 @@ def get_molecules_by_conditions(
                 query = query.order_by(fp.max_inner_product(embedding))
             elif distance == "cosine":
                 query = query.order_by(fp.cosine_distance(embedding))
-    statement = query.offset(skip).limit(limit)
+    statement = query.offset(skip).limit(limit).order_by(Molecule.id)
     db_molecules = session.exec(statement).all()
     return db_molecules
 

@@ -2,7 +2,7 @@
 Author: TMJ
 Date: 2024-04-29 14:43:13
 LastEditors: TMJ
-LastEditTime: 2024-04-29 14:44:55
+LastEditTime: 2024-05-05 20:12:25
 Description: 请填写简介
 """
 
@@ -51,12 +51,12 @@ def get_formulas_by_conditions(
                 query = query.where(
                     getattr(Formula, element_filter.element) == element_filter.count
                 )
-    statement = query.offset(skip).limit(limit)
+    statement = query.offset(skip).limit(limit).order_by(Formula.id)
     db_formulas = session.exec(statement).all()
     return db_formulas
+
 
 def get_formula_count(*, session: Session) -> ItemCount:
     count_statement = select(func.count()).select_from(Formula)
     count = session.exec(count_statement).one()
     return ItemCount(count=count)
-

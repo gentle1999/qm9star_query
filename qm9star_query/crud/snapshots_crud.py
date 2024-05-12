@@ -1,13 +1,39 @@
 from typing import Sequence
 
+from sqlmodel import Session, col, func, select
+
 from qm9star_query.models import Formula, Molecule, Snapshot
-from qm9star_query.models.utils import SnapshotFilter, ItemCount
-from qm9star_query.utils import (
-    elements_in_pt,
-    smi_to_embedding,
-    smiles_to_formula_dict,
+from qm9star_query.models.utils import ItemCount, SnapshotFilter
+from qm9star_query.utils import elements_in_pt, smi_to_embedding, smiles_to_formula_dict
+
+numeric_cols = (
+    "temperature",
+    "single_point_energy",
+    "zpve",
+    "energy_correction",
+    "enthalpy_correction",
+    "gibbs_free_energy_correction",
+    "U_0",
+    "U_T",
+    "H_T",
+    "G_T",
+    "S",
+    "Cv",
+    "isotropic_polarizability",
+    "electronic_spatial_extent",
+    "alpha_homo",
+    "alpha_lumo",
+    "alpha_gap",
+    "beta_homo",
+    "beta_lumo",
+    "beta_gap",
+    "first_frequency",
+    "second_frequency",
+    "spin_quantum_number",
+    "spin_square",
 )
-from sqlmodel import Session, col, select, func
+
+
 def get_snapshot_by_id(*, session: Session, snapshot_id: int) -> Snapshot:
     return session.get(Snapshot, snapshot_id)
 
@@ -53,6 +79,7 @@ def get_snapshots_by_conditions(
                 ).where(getattr(Formula, numeric_filter.column) <= numeric_filter.max)
             elif numeric_filter.column in (
                 "atom_number",
+                "total_charge",
                 "total_multiplicity",
                 "qed",
                 "logp",
@@ -60,25 +87,7 @@ def get_snapshots_by_conditions(
                 query = query.where(
                     getattr(Molecule, numeric_filter.column) >= numeric_filter.min
                 ).where(getattr(Molecule, numeric_filter.column) <= numeric_filter.max)
-            elif numeric_filter.column in (
-                "single_point_energy",
-                "zero_point_correction",
-                "energy_correction",
-                "enthalpy_correction",
-                "gibbs_free_energy_correction",
-                "zero_point_sum",
-                "thermal_energy_sum",
-                "thermal_enthalpy_sum",
-                "thermal_free_energy_sum",
-                "alpha_homo",
-                "alpha_lumo",
-                "alpha_gap",
-                "beta_homo",
-                "beta_lumo",
-                "beta_gap",
-                "spin_eginvalue",
-                "spin_multiplicity",
-            ):
+            elif numeric_filter.column in numeric_cols:
                 query = query.where(
                     getattr(Snapshot, numeric_filter.column) >= numeric_filter.min
                 ).where(getattr(Snapshot, numeric_filter.column) <= numeric_filter.max)
@@ -92,7 +101,7 @@ def get_snapshots_by_conditions(
                 query = query.where(
                     getattr(Snapshot, bool_filter.column) == bool_filter.value
                 )
-        if snapshot_filter.smiles:
+        if snapshot_filter.smiles is not None:
             embedding = smi_to_embedding(snapshot_filter.smiles, snapshot_filter.method)
             method = snapshot_filter.method
             distance = snapshot_filter.distance
@@ -112,10 +121,20 @@ def get_snapshots_by_conditions(
                 query = query.order_by(fp.max_inner_product(embedding))
             elif distance == "cosine":
                 query = query.order_by(fp.cosine_distance(embedding))
-    statement = query.offset(skip).limit(limit)
+    statement = query.offset(skip).limit(limit).order_by(Snapshot.id)
     return session.exec(statement).all()
+
 
 def get_snapshot_count(*, session: Session) -> ItemCount:
     count_statement = select(func.count()).select_from(Snapshot)
     count = session.exec(count_statement).one()
     return ItemCount(count=count)
+
+
+def get_snapshots_by_charge_multi(
+    *, session: Session, charge: int = 0, multiplicity: int = 1
+) -> Sequence[Snapshot]:
+    query = select(Snapshot).join(Molecule)
+    query = query.where(Molecule.total_charge == charge)
+    query = query.where(Molecule.total_multiplicity == multiplicity)
+    return session.exec(query).all()
