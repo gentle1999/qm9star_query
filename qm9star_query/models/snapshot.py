@@ -4,6 +4,8 @@ from typing import List
 from sqlalchemy import ARRAY, Column, Float, Integer
 from sqlmodel import Field, SQLModel
 
+from qm9star_query.models.molecule import MoleculeOut
+
 
 class SnapshotBase(SQLModel):
     # Molecule graph information, fully recoverable
@@ -260,6 +262,14 @@ class SnapshotUpdate(SnapshotBase):
 
     owner_id: int | None = None
     update_time: datetime = Field(default_factory=datetime.now)
+
+
+class SnapshotOut(SnapshotBase):
+    id: int
+    commit_time: datetime
+    update_time: datetime
+
+    molecule: MoleculeOut
 
 
 class SnapshotSDFOut(SQLModel):

@@ -129,3 +129,13 @@ class FormulaBase(SQLModel):
     # properties
     atom_number: int
     molwt: float | None = Field(default=None)
+
+
+class FormulaOut(SQLModel):
+    id: int
+    formula_string: str
+    atom_number: int
+    molwt: float
+
+    commit_time: datetime
+    update_time: datetime

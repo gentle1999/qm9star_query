@@ -11,12 +11,13 @@ from logging import getLogger
 
 import numpy as np
 import torch
-from sqlmodel import Session, create_engine, func, select
+from sqlmodel import Session, create_engine, func, select, col
 from sqlmodel.sql.expression import SelectOfScalar
 from torch_geometric.data import Data, DataLoader, Dataset, InMemoryDataset
 from tqdm import tqdm
 
 from qm9star_query.models import Formula, Snapshot
+from qm9star_query.models.snapshot import SnapshotOut
 from qm9star_query.utils import recover_rdmol
 
 
@@ -68,7 +69,7 @@ class BaseQM9starDataset(InMemoryDataset):
         log=False,
     ):
         self.dataset_name = dataset_name
-        self.names = [f"{dataset_name}_{i:02d}" for i in range(block_num)]
+        self.names = [f"{dataset_name}_chunk{i:02d}" for i in range(block_num)]
         self.session_url = (
             f"postgresql+psycopg2://{user}:{password}@{server}:{port}/{db}"
         )
@@ -101,13 +102,13 @@ class BaseQM9starDataset(InMemoryDataset):
         Downloads the dataset from QM9star database to `raw` dir
         """
         self.check_session()
-        data = self.get_data()
-        for raw_data, raw_name in zip(
-            np.array_split(data, len(self.names)), self.raw_paths
-        ):
-            np.savez(raw_name, data=raw_data)
+        for snapshot_ids, raw_path in zip(self.get_db_ids(), self.raw_paths):
+            raw_data = self.get_data(
+                snapshot_ids.tolist(), chunk_idx=self.raw_paths.index(raw_path)
+            )
+            np.savez(raw_path, data=raw_data)
             if self.log:
-                print(f"{raw_name} saved")
+                print(f"{raw_path} saved")
 
     def check_session(self):
         """
@@ -121,25 +122,27 @@ class BaseQM9starDataset(InMemoryDataset):
         else:
             self.session = session
 
-    def get_data(self):
+    def get_db_ids(self) -> list[np.ndarray]:
+        self.db_ids = np.array_split(
+            self.session.exec(self.db_select(select(Snapshot.id))).all(),
+            len(self.names),
+        )
+        return self.db_ids
+
+    def get_data(self, snapshot_ids: list[int], chunk_idx):
         if self.session is None:
             raise Exception("Session is None")
-        total_length = self.session.exec(
-            self.db_select(select(func.count()).select_from(Snapshot))
-        ).first()
-        temp_data = []
-        with tqdm(
-            total=total_length, desc=f"Downloading data {self.dataset_name}"
-        ) as pbar:
-            for snapshot in self.session.exec(self.db_select()).all():
-                pbar.update(1)
-                temp_data.append(
-                    {
-                        **snapshot.model_dump(),
-                        "molecule": snapshot.molecule.model_dump(),
-                    }
-                )
-        return temp_data
+        return [
+            SnapshotOut.model_validate(snapshot).model_dump()
+            for snapshot in tqdm(
+                self.session.exec(
+                    self.db_select(select(Snapshot)).where(
+                        col(Snapshot.id).in_(snapshot_ids)
+                    )
+                ).all(),
+                desc=f"Downloading data {self.dataset_name} chunk {chunk_idx:02d}",
+            )
+        ]
 
     def process(self) -> None:
         for idx, raw_path in enumerate(self.raw_paths):
