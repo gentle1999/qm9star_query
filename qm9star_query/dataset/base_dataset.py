@@ -7,18 +7,23 @@ Description: 请填写简介
 """
 
 import os
-from logging import getLogger
+from typing import Sequence, Union
 
 import numpy as np
 import torch
-from sqlmodel import Session, create_engine, func, select, col
+import torch.utils.data
+from sqlmodel import Session, col, create_engine, func, select
 from sqlmodel.sql.expression import SelectOfScalar
-from torch_geometric.data import Data, DataLoader, Dataset, InMemoryDataset
+from torch import Tensor
+from torch_geometric.data import Data, Dataset, InMemoryDataset
+from torch_geometric.data.data import BaseData
 from tqdm import tqdm
 
 from qm9star_query.models import Formula, Snapshot
 from qm9star_query.models.snapshot import SnapshotOut
 from qm9star_query.utils import recover_rdmol
+
+IndexType = Union[slice, Tensor, np.ndarray, Sequence]
 
 
 def update_slices(slices_list):
@@ -41,11 +46,11 @@ def transform_data(raw_data: dict):
     return Data(
         pos=torch.tensor(raw_data["coords"], dtype=torch.float32),
         z=torch.tensor(raw_data["atoms"], dtype=torch.int64),
-        energy=torch.tensor(raw_data["single_point_energy"], dtype=torch.int64),
+        energy=torch.tensor(raw_data["single_point_energy"], dtype=torch.float32),
         y=torch.tensor(raw_data["single_point_energy"], dtype=torch.float32),
-        energy_grad=torch.tensor(raw_data["gradients"], dtype=torch.float32),
+        energy_grad=-torch.tensor(raw_data["forces"], dtype=torch.float32),
         formal_charges=torch.tensor(raw_data["formal_charges"], dtype=torch.int64),
-        formal_radicals=torch.tensor(
+        formal_num_radicals=torch.tensor(
             raw_data["formal_num_radicals"], dtype=torch.int64
         ),
         bonds=torch.tensor(raw_data["bonds"], dtype=torch.int64),
@@ -162,12 +167,6 @@ class BaseQM9starDataset(InMemoryDataset):
     ) -> SelectOfScalar[int] | SelectOfScalar[Snapshot]:
         return selector
 
-    def __len__(self):
-        return len(self.slices[list(self.slices.keys())[0]])
-
-    def __getitem__(self, index: int):
-        return self.get(index)
-
     def get_rdmol(self, index: int):
         data = self[index]
         return recover_rdmol(
@@ -175,5 +174,28 @@ class BaseQM9starDataset(InMemoryDataset):
             atoms=np.array(data["z"]).tolist(),
             bonds=np.array(data["bonds"]).tolist(),
             formal_charges=np.array(data["formal_charges"]).tolist(),
-            formal_num_radicals=np.array(data["formal_radicals"]).tolist(),
+            formal_num_radicals=np.array(data["formal_num_radicals"]).tolist(),
         )
+
+    def __getitem__(
+        self,
+        idx: Union[int, np.integer, IndexType],
+    ) -> Union["Dataset", BaseData]:
+        r"""In case :obj:`idx` is of type integer, will return the data object
+        at index :obj:`idx` (and transforms it in case :obj:`transform` is
+        present).
+        In case :obj:`idx` is a slicing object, *e.g.*, :obj:`[2:5]`, a list, a
+        tuple, or a :obj:`torch.Tensor` or :obj:`np.ndarray` of type long or
+        bool, will return a subset of the dataset at the specified indices.
+        """
+        if (
+            isinstance(idx, (int, np.integer))
+            or (isinstance(idx, Tensor) and idx.dim() == 0)
+            or (isinstance(idx, np.ndarray) and np.isscalar(idx))
+        ):
+
+            data = self.get(self.indices()[idx])
+            return data
+
+        else:
+            return self.index_select(idx)

@@ -49,7 +49,7 @@ class SnapshotBase(SQLModel):
     spin_densities: List[float] | None = Field(
         sa_column=Column(ARRAY(Float)), default=[]
     )
-    gradients: List[List[float]] | None = Field(
+    forces: List[List[float]] | None = Field(
         sa_column=Column(ARRAY(Float, dimensions=2), comment="Unit: hartree/bohr"),
         default=[[]],
         description="Unit: hartree/bohr",
