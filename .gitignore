@@ -261,3 +261,6 @@ $RECYCLE.BIN/
 raw
 test*
 processed
+!tutorial/atom_ref/*.log
+sandbox
+backup

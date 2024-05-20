@@ -4305,9 +4305,9 @@ idna = ">=2.0"
 multidict = ">=4.0"
 
 [extras]
-dl = ["dive-into-graphs", "e3fp", "networkx", "nff", "pyg-lib", "pymatgen", "sympy", "tensorboard", "torch-cluster", "torch-scatter", "torch-sparse", "torch-spline-conv"]
+dl = ["ase", "dive-into-graphs", "e3fp", "networkx", "nff", "pyg-lib", "pymatgen", "sympy", "tensorboard", "torch-cluster", "torch-scatter", "torch-sparse", "torch-spline-conv"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "8041c80ff678fbc7f78553a43e62c878ef52e9e024b495c899e67cdd8de1848e"
+content-hash = "8092d9f780ce99ebd15098ff38f8e836b5cbdb43a279ca356ec5906a98817e8d"

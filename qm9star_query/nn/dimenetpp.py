@@ -125,22 +125,22 @@ class DimeNetPPCM(torch.nn.Module):
             update_v.reset_parameters()
 
     def forward(self, batch_data):
-        try:
-            z, pos, batch, chrg, mul = (
-                batch_data["nxyz"][:, 0].clone().detach().to(torch.int64),
-                batch_data["nxyz"][:, 1:],
-                batch_data["batch"],
-                batch_data["formal_charges"] + 8,
-                batch_data["formal_num_radicals"],
-            )
-        except:
-            z, pos, batch, chrg, mul = (
-                batch_data["nxyz"][:, 0].clone().detach().to(torch.int64),
-                batch_data["nxyz"][:, 1:],
-                batch_data["mol_idx"],
-                torch.zeros_like(batch_data["nxyz"][:, 0]).to(torch.int64) + 8,
-                torch.zeros_like(batch_data["nxyz"][:, 0]).to(torch.int64),
-            )
+        z, pos = (
+            batch_data["nxyz"][:, 0].clone().detach().to(torch.int64),
+            batch_data["nxyz"][:, 1:],
+        )
+        if "batch" in batch_data:
+            batch = batch_data["batch"]
+        else:
+            batch = batch_data["mol_idx"]
+        if "formal_charges" in batch_data:
+            chrg = batch_data["formal_charges"] + 8
+        else:
+            chrg = torch.zeros_like(batch_data["nxyz"][:, 0]).to(torch.int64) + 8
+        if "formal_num_radicals" in batch_data:
+            mul = batch_data["formal_num_radicals"]
+        else:
+            mul = torch.zeros_like(batch_data["nxyz"][:, 0]).to(torch.int64)
 
         if self.energy_and_force:
             pos.requires_grad_()
