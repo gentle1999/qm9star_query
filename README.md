@@ -2,7 +2,7 @@
  * @Author: TMJ
  * @Date: 2024-04-29 09:59:49
  * @LastEditors: TMJ
- * @LastEditTime: 2024-05-16 18:43:48
+ * @LastEditTime: 2024-05-20 16:45:53
  * @Description: 请填写简介
 -->
 # qm9star_query
@@ -31,6 +31,12 @@ If your cuda version not matches 12.1, you need to remove the dependencies of py
 poetry remove pyg-lib torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric
 poetry add https://data.pyg.org/whl/torch-2.3.0%2Bcu121.html # Use correct cuda version
 ```
+
+**Note**: If you excute `poetry install` without `--E dl` again, the extra dependencies will be removed.
+
+### Failure Solution
+- DIG dependency conflict
+  
 The `DIG` package contains a dependency called `rdkit-pypi`, which may overwrite the original higher version of rdkit when installing, if you encounter this problem, you can use the following methods to solve it.
 
 ```bash
@@ -40,7 +46,14 @@ poetry add rdkit
 
 Poetry will consider these to be two packages, so it will check that they both exist, but we want the higher version of rdkit to override the lower one.
 
-**Note**: If you excute `poetry install` without `--E dl` again, the extra dependencies will be removed.
+- Poetry stuck at pending
+
+Sometimes Poetry's dependency resolution gets stuck in hellish wait times, which can be due to network or other reasons. In this case, you can try installing the dependency directly using the following command
+
+```bash
+pip install .
+pip install .[dl] # If you want to use the dl functions
+```
 
 ## Usage
 

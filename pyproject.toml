@@ -34,6 +34,7 @@ setuptools = "^69.5.1"
 packaging = "^24.0"
 ipykernel = "^6.29.4"
 rdkit = "^2023.9.6"
+pint = "^0.23"
 
 [tool.poetry.extras]
 dl = ["ase", "pyg-lib", "torch-cluster", "torch-scatter", "torch-sparse", "torch-spline-conv", "networkx", "pymatgen", "sympy", "e3fp", "tensorboard", "dive-into-graphs", "nff"]
