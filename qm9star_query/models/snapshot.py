@@ -227,7 +227,7 @@ class SnapshotBase(SQLModel):
     atom_atom_overlap_bond_order: List[List[float]] | None = Field(
         sa_column=Column(ARRAY(Float, dimensions=2)), default=[[]]
     )
-    nbo_charges: List[float] | None = Field(sa_column=Column(ARRAY(Float)), default=[])
+    npa_charges: List[float] | None = Field(sa_column=Column(ARRAY(Float)), default=[])
     lowdin_charges: List[float] | None = Field(
         sa_column=Column(ARRAY(Float)), default=[]
     )
