@@ -7,7 +7,7 @@ Description: 请填写简介
 """
 
 import os
-from typing import Sequence, Union
+from typing import Sequence, Union, Callable
 
 import numpy as np
 import torch
@@ -71,6 +71,7 @@ class BaseQM9starDataset(InMemoryDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
+        selector_func:Callable=None,
         log=False,
     ):
         self.dataset_name = dataset_name
@@ -78,6 +79,8 @@ class BaseQM9starDataset(InMemoryDataset):
         self.session_url = (
             f"postgresql+psycopg2://{user}:{password}@{server}:{port}/{db}"
         )
+        if selector_func:
+            self.db_select = selector_func
         super().__init__(
             root,
             transform=transform,
@@ -129,7 +132,9 @@ class BaseQM9starDataset(InMemoryDataset):
 
     def get_db_ids(self) -> list[np.ndarray]:
         self.db_ids = np.array_split(
-            self.session.exec(self.db_select(select(Snapshot.id))).all(),
+            self.session.exec(
+                self.db_select(select(Snapshot.id)).order_by(Snapshot.id)
+            ).all(),
             len(self.names),
         )
         return self.db_ids
@@ -141,9 +146,9 @@ class BaseQM9starDataset(InMemoryDataset):
             SnapshotOut.model_validate(snapshot).model_dump()
             for snapshot in tqdm(
                 self.session.exec(
-                    self.db_select(select(Snapshot)).where(
-                        col(Snapshot.id).in_(snapshot_ids)
-                    )
+                    self.db_select(select(Snapshot))
+                    .where(col(Snapshot.id).in_(snapshot_ids))
+                    .order_by(Snapshot.id)
                 ).all(),
                 desc=f"Downloading data {self.dataset_name} chunk {chunk_idx:02d}",
             )
@@ -162,8 +167,9 @@ class BaseQM9starDataset(InMemoryDataset):
             if self.log:
                 print(f"{self.processed_paths[idx]} saved")
 
+    @staticmethod
     def db_select(
-        self, selector=select(Snapshot)
+        selector=select(Snapshot),
     ) -> SelectOfScalar[int] | SelectOfScalar[Snapshot]:
         return selector
 

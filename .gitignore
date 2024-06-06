@@ -260,7 +260,8 @@ $RECYCLE.BIN/
 
 raw
 test*
+!testset*
 processed
 !tutorial/atom_ref/*.log
-sandbox
+!sandbox
 backup

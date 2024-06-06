@@ -7,6 +7,7 @@ Description: 请填写简介
 """
 
 import os
+from typing import Callable
 
 from sqlmodel import Session, create_engine, func, select
 from sqlmodel.sql.expression import SelectOfScalar
@@ -31,6 +32,7 @@ class NeutralQM9starDataset(BaseQM9starDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
+        selector_func: Callable = None,
         log=False,
     ):
         super().__init__(
@@ -45,11 +47,13 @@ class NeutralQM9starDataset(BaseQM9starDataset):
             transform=transform,
             pre_transform=pre_transform,
             pre_filter=pre_filter,
+            selector_func=selector_func,
             log=log,
         )
 
+    @staticmethod
     def db_select(
-        self, selector=select(Snapshot)
+        selector=select(Snapshot),
     ) -> SelectOfScalar[int] | SelectOfScalar[Snapshot]:
         return (
             selector.join(Molecule)
@@ -72,6 +76,7 @@ class CationQM9starDataset(BaseQM9starDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
+        selector_func: Callable = None,
         log=False,
     ):
         super().__init__(
@@ -86,11 +91,13 @@ class CationQM9starDataset(BaseQM9starDataset):
             transform=transform,
             pre_transform=pre_transform,
             pre_filter=pre_filter,
+            selector_func=selector_func,
             log=log,
         )
 
+    @staticmethod
     def db_select(
-        self, selector=select(Snapshot)
+        selector=select(Snapshot),
     ) -> SelectOfScalar[int] | SelectOfScalar[Snapshot]:
         return (
             selector.join(Molecule)
@@ -113,6 +120,7 @@ class AnionQM9starDataset(BaseQM9starDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
+        selector_func: Callable = None,
         log=False,
     ):
         super().__init__(
@@ -127,11 +135,13 @@ class AnionQM9starDataset(BaseQM9starDataset):
             transform=transform,
             pre_transform=pre_transform,
             pre_filter=pre_filter,
+            selector_func=selector_func,
             log=log,
         )
 
+    @staticmethod
     def db_select(
-        self, selector=select(Snapshot)
+        selector=select(Snapshot),
     ) -> SelectOfScalar[int] | SelectOfScalar[Snapshot]:
         return (
             selector.join(Molecule)
@@ -154,6 +164,7 @@ class RadicalQM9starDataset(BaseQM9starDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
+        selector_func: Callable = None,
         log=False,
     ):
         super().__init__(
@@ -168,11 +179,13 @@ class RadicalQM9starDataset(BaseQM9starDataset):
             transform=transform,
             pre_transform=pre_transform,
             pre_filter=pre_filter,
+            selector_func=selector_func,
             log=log,
         )
 
+    @staticmethod
     def db_select(
-        self, selector=select(Snapshot)
+        selector=select(Snapshot),
     ) -> SelectOfScalar[int] | SelectOfScalar[Snapshot]:
         return (
             selector.join(Molecule)
