@@ -2,16 +2,16 @@
  * @Author: TMJ
  * @Date: 2024-04-29 16:14:07
  * @LastEditors: TMJ
- * @LastEditTime: 2024-06-17 16:14:40
+ * @LastEditTime: 2024-06-17 16:53:58
  * @Description: 请填写简介
 -->
 # Download and deploy QM9*
 
-QM9* is a reactive intermidiate dataset, which is an extension of the QM9 dataset containing more than 2,000,000 molecular structures. This tutorial shows how to download and deploy the QM9* dataset. Our raw data dumps are available at [figshare](https://figshare.com/s/0197719193f72e70b31a). You can download the data dumps from the link above. Then unzip the files.
+QM9* is a reactive intermediate dataset, which is an extension of the QM9 dataset containing more than 2,000,000 molecular structures. This tutorial shows how to download and deploy the QM9* dataset. Our raw data dumps are available at [figshare](https://figshare.com/s/0197719193f72e70b31a). You can download the data dumps from the link above. Then unzip the files.
 
 ## Install the environment
 
-The dumps are PostgreSQL dumps. To use them, you need to install PostgreSQL (we recommend version 16) with pgvector extension, and a client to connect to it (we recommend pgadmin4). You can run PostgreSQL by Docker following the code below:
+The dumps are PostgreSQL dumps. To use them, you need to install PostgreSQL (we recommend version 16) with pgvector extension, and a client to connect to it (we recommend pgAdmin 4). You can run PostgreSQL by Docker following the code below:
 
 ```bash
 docker pull pgvector/pgvector:pg16
@@ -41,14 +41,15 @@ We recommend using pgAdmin 4 to visualize the database connection. You can downl
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_15-54-46.png)
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_15-57-58.png)
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_16-00-17.png)
-1. Restore the dumps.
+
+2. Restore the dumps.
    
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_16-00-48.png)
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_16-01-14.png)
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_16-01-27.png)
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_16-03-27.png)
 
-1. Wait for the restore to finish. (May take an hour or more)
+3. Wait for the restore to finish. (May take an hour or more)
   
 ## Connect to the database
 
