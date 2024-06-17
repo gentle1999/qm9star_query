@@ -2,12 +2,18 @@
  * @Author: TMJ
  * @Date: 2024-04-29 09:59:49
  * @LastEditors: TMJ
- * @LastEditTime: 2024-05-20 16:45:53
+ * @LastEditTime: 2024-06-17 16:15:53
  * @Description: 请填写简介
 -->
 # qm9star_query
 
 A SQLModel-based repository dedicated to helping users access the PostgreSQL-based qm9star database more easily in a Python environment.
+
+## Usage
+
+This repository requires a reasonably deployed QM9star database to run. For information on how to deploy a QM9star database, please refer to the [download_and_deploy_qm9star](tutorial/1-download_and_deploy_qm9star.md).
+
+Once you have deployed correctly and checked network connectivity, you can refer to the [query_example](tutorial/2-query_example.ipynb) to run queries.
 
 ## Installation
 
@@ -55,11 +61,6 @@ pip install .
 pip install .[dl] # If you want to use the dl functions
 ```
 
-## Usage
-
-This repository requires a reasonably deployed QM9star database to run. For information on how to deploy a QM9star database, please refer to the [download_and_deploy_qm9star](tutorial/1-download_and_deploy_qm9star.md).
-
-Once you have deployed correctly and checked network connectivity, you can refer to the [query_example](tutorial/2-query_example.ipynb) to run queries.
 
 
 
