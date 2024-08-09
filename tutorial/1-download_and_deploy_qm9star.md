@@ -5,9 +5,9 @@
  * @LastEditTime: 2024-06-17 16:53:58
  * @Description: 请填写简介
 -->
-# Download and deploy QM9*
+# Download and deploy QM9\*
 
-QM9* is a reactive intermediate dataset, which is an extension of the QM9 dataset containing more than 2,000,000 molecular structures. This tutorial shows how to download and deploy the QM9* dataset. Our raw data dumps are available at [figshare](https://figshare.com/s/0197719193f72e70b31a). You can download the data dumps from the link above. Then unzip the files.
+QM9\* is a reactive intermediate dataset, which is an extension of the QM9 dataset containing more than 2,000,000 molecular structures. This tutorial shows how to download and deploy the QM9* dataset. Our raw data dumps are available at [figshare](https://figshare.com/s/0197719193f72e70b31a). You can download the data dumps from the link above. Then unzip the files.
 
 ## Install the environment
 
@@ -37,13 +37,11 @@ Of course, you can also use other methods to install PostgreSQL and pgvector ext
 We recommend using pgAdmin 4 to visualize the database connection. You can download pgAdmin 4 from [here](https://www.pgadmin.org/download/).
 
 1. Create a new server connection.
-   
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_15-54-46.png)
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_15-57-58.png)
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_16-00-17.png)
 
 2. Restore the dumps.
-   
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_16-00-48.png)
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_16-01-14.png)
 ![img1](image/1-download_and_deploy_qm9star/PixPin_2024-06-17_16-01-27.png)

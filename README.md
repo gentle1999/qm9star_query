@@ -2,7 +2,7 @@
  * @Author: TMJ
  * @Date: 2024-04-29 09:59:49
  * @LastEditors: TMJ
- * @LastEditTime: 2024-06-17 16:15:53
+ * @LastEditTime: 2024-08-09 10:58:31
  * @Description: 请填写简介
 -->
 # qm9star_query
@@ -17,15 +17,16 @@ Once you have deployed correctly and checked network connectivity, you can refer
 
 ## Installation
 
-### For users who only want to use the functions of connecting to databases and downloading datasets in this project, you can install the package following the steps below:
+### For users who only want to use the functions of connecting to databases and downloading datasets in this project, you can install the package following the steps below
 
 ```bash
-git clone http://10.72.201.58:13000/tmj/qm9star_query.git
+git clone https://github.com/gentle1999/qm9star_query.git
 cd qm9star_query
 pip install poetry # if you don't have poetry installed
 poetry install
 ```
-### A demonstration guide on how to train neural network potential functions using the QM9star dataset is also provided in this project, and if you want to use these functions, you need to refer to the following steps:
+
+### A demonstration guide on how to train neural network potential functions using the QM9star dataset is also provided in this project, and if you want to use these functions, you need to refer to the following steps
 
 ```bash
 poetry install -E dl
@@ -41,6 +42,7 @@ poetry add https://data.pyg.org/whl/torch-2.3.0%2Bcu121.html # Use correct cuda 
 **Note**: If you excute `poetry install` without `--E dl` again, the extra dependencies will be removed.
 
 ### Failure Solution
+
 - DIG dependency conflict
   
 The `DIG` package contains a dependency called `rdkit-pypi`, which may overwrite the original higher version of rdkit when installing, if you encounter this problem, you can use the following methods to solve it.
@@ -60,7 +62,3 @@ Sometimes Poetry's dependency resolution gets stuck in hellish wait times, which
 pip install .
 pip install .[dl] # If you want to use the dl functions
 ```
-
-
-
-
