@@ -19,6 +19,8 @@ from qm9star_query.models.formula import FormulaOut
 class MoleculeBase(SQLModel):
     # Topological properties of the molecule
     smiles: str = Field(index=True, unique=True)
+    inchi: str = Field(index=True)
+    canonical_smiles: str = Field(index=True)
     total_charge: int
     total_multiplicity: int
 
@@ -48,6 +50,8 @@ class MoleculeCreate(MoleculeBase):
 class MoleculeOut(SQLModel):
     id: int
     smiles: str
+    inchi: str
+    canonical_smiles: str
     total_charge: int
     total_multiplicity: int
     qed: float | None = None

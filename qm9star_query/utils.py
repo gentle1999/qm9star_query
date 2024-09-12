@@ -1,8 +1,10 @@
 import hashlib
 from typing import List, Literal
-from qm9star_query.models import Snapshot
+
 from rdkit import Chem
 from rdkit.Chem import AllChem
+
+from qm9star_query.models import Snapshot
 
 pt = Chem.GetPeriodicTable()
 elements_in_pt = [pt.GetElementSymbol(i) for i in range(1, 119)]
@@ -100,16 +102,7 @@ def recover_rdmol(
     formal_charges: List[int],
     formal_num_radicals: List[int],
 ) -> Chem.Mol:
-    xyz_block = (
-        f"{len(coords)}\n"
-        + "\n"
-        + "\n".join(
-            [
-                f"{Chem.Atom(atom).GetSymbol():10s}{x:10.5f}{y:10.5f}{z:10.5f}"
-                for atom, (x, y, z) in zip(atoms, coords)
-            ]
-        )
-    )
+    xyz_block = build_xyz(coords, atoms)
     rdmol = Chem.RWMol(Chem.MolFromXYZBlock(xyz_block))
     for bond_start, bond_end, bond_order in bonds:
         rdmol.AddBond(bond_start, bond_end, bond_list[bond_order])
@@ -132,6 +125,31 @@ def recover_rdmol_from_snapshot(snapshot: Snapshot) -> Chem.Mol:
         formal_num_radicals=snapshot.formal_num_radicals,
     )
 
+
+
+def build_xyz(
+    coords: List[List[float]],
+    atoms: List[str],
+):
+    xyz_block = (
+        f"{len(coords)}\n"
+        + "\n"
+        + "\n".join(
+            [
+                f"{Chem.Atom(atom).GetSymbol():10s}{x:10.5f}{y:10.5f}{z:10.5f}"
+                for atom, (x, y, z) in zip(atoms, coords)
+            ]
+        )
+    )
+
+    return xyz_block
+
+
+def build_xyz_from_snapshot(snapshot: Snapshot):
+    return build_xyz(
+        coords=snapshot.coords,
+        atoms=snapshot.atoms,
+    )
 
 def smiles_to_formula_dict(smi: str):
     mol = Chem.AddHs(Chem.MolFromSmiles(smi))

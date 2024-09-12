@@ -13,6 +13,9 @@ from sqlmodel import Session, select, func
 def get_molecule_by_id(*, session: Session, molecule_id: int) -> Molecule:
     return session.get(Molecule, molecule_id)
 
+def get_molecule_ids(*, session: Session) -> Sequence[int]:
+    return session.exec(select(Molecule.id)).all()
+
 
 def get_molecule_by_smiles(*, session: Session, smiles: str) -> Molecule:
     formula_dict = smiles_to_formula_dict(smiles)

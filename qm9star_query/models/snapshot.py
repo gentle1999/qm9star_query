@@ -57,8 +57,8 @@ class SnapshotBase(SQLModel):
     single_point_energy: float | None = Field(
         default=None,
         nullable=True,
-        description="Unit: hartree/particle",
-        sa_column_kwargs={"comment": "Unit: hartree/particle"},
+        description="Unit: hartree",
+        sa_column_kwargs={"comment": "Unit: hartree"},
     )
     zpve: float | None = Field(
         default=None,
@@ -140,38 +140,38 @@ class SnapshotBase(SQLModel):
     alpha_homo: float | None = Field(
         default=None,
         nullable=True,
-        description="Unit: hartree/particle",
-        sa_column_kwargs={"comment": "Unit: hartree/particle"},
+        description="Unit: hartree",
+        sa_column_kwargs={"comment": "Unit: hartree"},
     )
     alpha_lumo: float | None = Field(
         default=None,
         nullable=True,
-        description="Unit: hartree/particle",
-        sa_column_kwargs={"comment": "Unit: hartree/particle"},
+        description="Unit: hartree",
+        sa_column_kwargs={"comment": "Unit: hartree"},
     )
     alpha_gap: float | None = Field(
         default=None,
         nullable=True,
-        description="Unit: hartree/particle",
-        sa_column_kwargs={"comment": "Unit: hartree/particle"},
+        description="Unit: hartree",
+        sa_column_kwargs={"comment": "Unit: hartree"},
     )
     beta_homo: float | None = Field(
         default=None,
         nullable=True,
-        description="Unit: hartree/particle",
-        sa_column_kwargs={"comment": "Unit: hartree/particle"},
+        description="Unit: hartree",
+        sa_column_kwargs={"comment": "Unit: hartree"},
     )
     beta_lumo: float | None = Field(
         default=None,
         nullable=True,
-        description="Unit: hartree/particle",
-        sa_column_kwargs={"comment": "Unit: hartree/particle"},
+        description="Unit: hartree",
+        sa_column_kwargs={"comment": "Unit: hartree"},
     )
     beta_gap: float | None = Field(
         default=None,
         nullable=True,
-        description="Unit: hartree/particle",
-        sa_column_kwargs={"comment": "Unit: hartree/particle"},
+        description="Unit: hartree",
+        sa_column_kwargs={"comment": "Unit: hartree"},
     )
     freqs: List[float] | None = Field(
         sa_column=Column(ARRAY(Float), comment="Unit: cm^-1"),
@@ -184,9 +184,9 @@ class SnapshotBase(SQLModel):
         description="Unit: amu",
     )
     IR_intensities: List[float] | None = Field(
-        sa_column=Column(ARRAY(Float), comment="Unit: kmol/mol"),
+        sa_column=Column(ARRAY(Float), comment="Unit: km/mol"),
         default=[],
-        description="Unit: kmol/mol",
+        description="Unit: km/mol",
     )
     force_constants: List[float] | None = Field(
         sa_column=Column(ARRAY(Float), comment="Unit: mdyne/angstrom"),

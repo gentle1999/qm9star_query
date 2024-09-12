@@ -33,6 +33,9 @@ numeric_cols = (
     "spin_square",
 )
 
+def get_snapshot_ids(*, session: Session) -> Sequence[int]:
+    return session.exec(select(Snapshot.id)).all()
+
 
 def get_snapshot_by_id(*, session: Session, snapshot_id: int) -> Snapshot:
     return session.get(Snapshot, snapshot_id)
