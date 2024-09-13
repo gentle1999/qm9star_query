@@ -2,12 +2,12 @@
  * @Author: TMJ
  * @Date: 2024-04-29 16:14:07
  * @LastEditors: TMJ
- * @LastEditTime: 2024-06-17 16:53:58
+ * @LastEditTime: 2024-09-13 11:30:39
  * @Description: 请填写简介
 -->
 # Download and deploy QM9\*
 
-QM9\* is a reactive intermediate dataset, which is an extension of the QM9 dataset containing more than 2,000,000 molecular structures. This tutorial shows how to download and deploy the QM9* dataset. Our raw data dumps are available at [figshare](https://figshare.com/s/0197719193f72e70b31a). You can download the data dumps from the link above. Then unzip the files.
+QM9\* is a reactive intermediate dataset, which is an extension of the QM9 dataset containing more than 2,000,000 molecular structures. This tutorial shows how to download and deploy the QM9* dataset. Our raw data dumps are available at [figshare](https://figshare.com/s/6906774d7d218d625978). You can download the data dumps from the link above. Then unzip the files.
 
 ## Install the environment
 
