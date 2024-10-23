@@ -2,12 +2,14 @@
  * @Author: TMJ
  * @Date: 2024-04-29 09:59:49
  * @LastEditors: TMJ
- * @LastEditTime: 2024-08-09 10:58:31
+ * @LastEditTime: 2024-10-23 10:15:33
  * @Description: 请填写简介
 -->
 # qm9star_query
 
 A SQLModel-based repository dedicated to helping users access the PostgreSQL-based qm9star database more easily in a Python environment.
+
+This is a repository for paper *"[QM9star, two million DFT-computed equilibrium structures for ions and radicals with atomic information](https://www.nature.com/articles/s41597-024-03933-6)"*.
 
 ## Usage
 
@@ -61,4 +63,23 @@ Sometimes Poetry's dependency resolution gets stuck in hellish wait times, which
 ```bash
 pip install .
 pip install .[dl] # If you want to use the dl functions
+```
+
+## How to cite
+
+```bibtex
+@article{tangQM9starTwoMillion2024a,
+  title = {{{QM9star}}, Two Million {{DFT-computed}} Equilibrium Structures for Ions and Radicals with Atomic Information},
+  author = {Tang, Miao-Jiong and Zhu, Tian-Cheng and Zhang, Shuo-Qing and Hong, Xin},
+  year = {2024},
+  month = oct,
+  journal = {Scientific Data},
+  volume = {11},
+  number = {1},
+  pages = {1158},
+  issn = {2052-4463},
+  doi = {10.1038/s41597-024-03933-6},
+  urldate = {2024-10-22},
+  langid = {english}
+}
 ```
