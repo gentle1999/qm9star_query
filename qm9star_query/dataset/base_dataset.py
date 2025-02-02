@@ -7,7 +7,7 @@ Description: 请填写简介
 """
 
 import os
-from typing import Sequence, Union, Callable
+from typing import Callable, Sequence, Union
 
 import numpy as np
 import torch
@@ -71,10 +71,11 @@ class BaseQM9starDataset(InMemoryDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
-        selector_func:Callable=None,
+        selector_func: Callable = None,
         log=False,
     ):
         self.dataset_name = dataset_name
+        self.block_num = block_num
         self.names = [f"{dataset_name}_chunk{i:02d}" for i in range(block_num)]
         self.session_url = (
             f"postgresql+psycopg2://{user}:{password}@{server}:{port}/{db}"
@@ -131,12 +132,14 @@ class BaseQM9starDataset(InMemoryDataset):
             self.session = session
 
     def get_db_ids(self) -> list[np.ndarray]:
-        self.db_ids = np.array_split(
-            self.session.exec(
-                self.db_select(select(Snapshot.id)).order_by(Snapshot.id)
-            ).all(),
-            len(self.names),
-        )
+        total_ids = self.session.exec(
+            self.db_select(select(Snapshot.id)).order_by(Snapshot.id)
+        ).all()
+        assert len(total_ids) > 0, "No data found in database"
+        assert (
+            len(total_ids) >= 2 * self.block_num
+        ), "No enough data to split, try smaller block_num"
+        self.db_ids = np.array_split(total_ids, len(self.names))
         return self.db_ids
 
     def get_data(self, snapshot_ids: list[int], chunk_idx):

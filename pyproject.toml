@@ -35,10 +35,41 @@ packaging = "^24.0"
 ipykernel = "^6.29.4"
 rdkit = "^2023.9.6"
 pint = "^0.23"
+uvicorn = { extras = ["standard"], version = "^0.34.0", optional = true }
+fastapi = { version = "^0.115.8", optional = true }
+fastapi-scheduler = { version = "^0.0.15", optional = true }
+python-multipart = { version = "^0.0.20", optional = true }
+tenacity = { version = "^9.0.0", optional = true }
+gunicorn = { version = "^23.0.0", optional = true }
+jinja2 = { version = "^3.1.5", optional = true }
+alembic = { version = "^1.14.1", optional = true }
 
 [tool.poetry.extras]
-dl = ["ase", "pyg-lib", "torch-cluster", "torch-scatter", "torch-sparse", "torch-spline-conv", "networkx", "pymatgen", "sympy", "e3fp", "tensorboard", "dive-into-graphs", "nff"]
-
+dl = [
+    "ase",
+    "pyg-lib",
+    "torch-cluster",
+    "torch-scatter",
+    "torch-sparse",
+    "torch-spline-conv",
+    "networkx",
+    "pymatgen",
+    "sympy",
+    "e3fp",
+    "tensorboard",
+    "dive-into-graphs",
+    "nff",
+]
+api = [
+    "uvicorn",
+    "fastapi",
+    "fastapi-scheduler",
+    "python-multipart",
+    "tenacity",
+    "gunicorn",
+    "jinja2",
+    "alembic",
+]
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
