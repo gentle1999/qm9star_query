@@ -146,7 +146,7 @@ class BaseQM9starDataset(InMemoryDataset):
             SnapshotOut.model_validate(snapshot).model_dump()
             for snapshot in tqdm(
                 self.session.exec(
-                    self.db_select(select(Snapshot))
+                    select(Snapshot)
                     .where(col(Snapshot.id).in_(snapshot_ids))
                     .order_by(Snapshot.id)
                 ).all(),
