@@ -7,7 +7,7 @@ Description: 请填写简介
 """
 
 import os
-from typing import Callable, Sequence, Union
+from typing import Callable, Dict, Sequence, Union
 
 import numpy as np
 import torch
@@ -26,7 +26,7 @@ from qm9star_query.utils import recover_rdmol
 IndexType = Union[slice, Tensor, np.ndarray, Sequence]
 
 
-def update_slices(slices_list):
+def update_slices(slices_list: Sequence[Dict[str, Tensor]]):
     # 初始化一个全新的slices字典
     new_slices = {
         key: torch.zeros(1, dtype=torch.long) for key in slices_list[0].keys()
@@ -150,8 +150,8 @@ class BaseQM9starDataset(InMemoryDataset):
             for snapshot in tqdm(
                 self.session.exec(
                     select(Snapshot)
-                    .where(col(Snapshot.id).in_(snapshot_ids))
                     .order_by(Snapshot.id)
+                    .where(col(Snapshot.id).in_(snapshot_ids))
                 ).all(),
                 desc=f"Downloading data {self.dataset_name} chunk {chunk_idx:02d}",
             )
