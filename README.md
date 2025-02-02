@@ -2,7 +2,7 @@
  * @Author: TMJ
  * @Date: 2024-04-29 09:59:49
  * @LastEditors: TMJ
- * @LastEditTime: 2024-10-23 10:15:33
+ * @LastEditTime: 2025-02-02 23:04:51
  * @Description: 请填写简介
 -->
 # qm9star_query
@@ -64,6 +64,19 @@ Sometimes Poetry's dependency resolution gets stuck in hellish wait times, which
 pip install .
 pip install .[dl] # If you want to use the dl functions
 ```
+
+## API server
+
+This repository also provides a simple API server for accessing the QM9star database. You can start the server by running the following command
+
+```bash
+poetry install -E api
+poetry run uvicorn qm9star_query.run_api_server:app --reload --port 8000 --host 0.0.0.0 # Change the port and host as needed
+```
+
+You can then access the documentation of the API server at `http://localhost:8000/docs` to see the available endpoints and their parameters.
+
+![API server documentation](image/README/api_doc.png)
 
 ## How to cite
 

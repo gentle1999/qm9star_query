@@ -66,6 +66,7 @@ def get_snapshots_by_conditions(
 ) -> Sequence[Snapshot]:
     query = select(Snapshot).join(Molecule).join(Formula)
     if snapshot_filter:
+        # element filters
         for element_filter in snapshot_filter.element_filters:
             if element_filter.element not in elements_in_pt:
                 continue
@@ -75,6 +76,7 @@ def get_snapshots_by_conditions(
                 query = query.where(
                     getattr(Formula, element_filter.element) == element_filter.count
                 )
+        # numeric filters
         for numeric_filter in snapshot_filter.numeric_filters:
             if numeric_filter.column in ("atom_number", "molwt"):
                 query = query.where(
@@ -94,11 +96,13 @@ def get_snapshots_by_conditions(
                 query = query.where(
                     getattr(Snapshot, numeric_filter.column) >= numeric_filter.min
                 ).where(getattr(Snapshot, numeric_filter.column) <= numeric_filter.max)
+        # class filters
         for class_filter in snapshot_filter.class_filters:
             if hasattr(Snapshot, class_filter.column):
                 query = query.where(
                     col(getattr(Snapshot, class_filter.column)).in_(class_filter.values)
                 )
+        # bool filters
         for bool_filter in snapshot_filter.bool_filters:
             if hasattr(Snapshot, bool_filter.column):
                 query = query.where(

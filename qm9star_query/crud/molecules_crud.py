@@ -71,6 +71,7 @@ def get_molecules_by_conditions(
 ) -> Sequence[Molecule]:
     query = select(Molecule).join(Formula)
     if molecule_filter:
+        # element filters
         for element_filter in molecule_filter.element_filters:
             if element_filter.element not in elements_in_pt:
                 continue
@@ -80,6 +81,7 @@ def get_molecules_by_conditions(
                 query = query.where(
                     getattr(Formula, element_filter.element) == element_filter.count
                 )
+        # numeirc filters
         for numeric_filter in molecule_filter.numeric_filters:
             if numeric_filter.column in ("molwt", "atom_number"):
                 query = query.where(

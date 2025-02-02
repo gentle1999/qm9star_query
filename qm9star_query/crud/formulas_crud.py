@@ -1,14 +1,6 @@
-"""
-Author: TMJ
-Date: 2024-04-29 14:43:13
-LastEditors: TMJ
-LastEditTime: 2024-05-05 20:12:25
-Description: 请填写简介
-"""
-
 from typing import Sequence
 
-from sqlmodel import Session, select, func
+from sqlmodel import Session, func, select
 
 from qm9star_query.models import Formula
 from qm9star_query.models.utils import FormulaFilter, ItemCount
@@ -37,11 +29,13 @@ def get_formulas_by_conditions(
 ) -> Sequence[Formula]:
     query = select(Formula)
     if formula_filter:
+        # numeric_filters
         for numeric_filter in formula_filter.numeric_filters:
             if numeric_filter.column in ("molwt", "atom_number"):
                 query = query.where(
                     getattr(Formula, numeric_filter.column) >= numeric_filter.min
                 ).where(getattr(Formula, numeric_filter.column) <= numeric_filter.max)
+        # element_filters
         for element_filter in formula_filter.element_filters:
             if element_filter.element not in elements_in_pt:
                 continue

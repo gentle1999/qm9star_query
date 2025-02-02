@@ -1,3 +1,10 @@
+'''
+Author: TMJ
+Date: 2025-02-02 10:59:28
+LastEditors: TMJ
+LastEditTime: 2025-02-02 16:37:10
+Description: 请填写简介
+'''
 import hashlib
 from typing import List, Literal
 

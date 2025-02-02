@@ -5,7 +5,7 @@ from sqlmodel import Field, SQLModel
 
 
 class FormulaBase(SQLModel):
-    formula_string: str = Field(index=True, unique=True)
+    formula_string: str = Field(description="The chemical formula of the compound, e.g. C2H6O", index=True, unique=True)
     # elements
     H: int = Field(default=0, index=True)
     He: int = Field(default=0)
@@ -133,9 +133,14 @@ class FormulaBase(SQLModel):
 
 class FormulaOut(SQLModel):
     id: int
-    formula_string: str
-    atom_number: int
-    molwt: float
+    formula_string: str = Field(description="The chemical formula of the compound, e.g. C2H6O")
+    atom_number: int = Field(description="The number of atoms in the compound")
+    molwt: float = Field(description="The molecular weight of the compound")
 
-    commit_time: datetime
-    update_time: datetime
+    commit_time: datetime = Field(description="The time when the data is committed to the database")
+    update_time: datetime = Field(description="The time when the data is last updated")
+
+
+class FormulasOut(SQLModel):
+    count: int = Field(description="The count of formulas")
+    data: List[FormulaOut] = Field(description="The list of formulas")

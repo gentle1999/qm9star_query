@@ -1,11 +1,3 @@
-"""
-Author: TMJ
-Date: 2024-04-29 10:53:34
-LastEditors: TMJ
-LastEditTime: 2024-05-13 15:10:39
-Description: 请填写简介
-"""
-
 from datetime import datetime
 from typing import List
 
@@ -35,33 +27,40 @@ class MoleculeBase(SQLModel):
     topological_torsion_fp_1024: List[int] = Field(sa_column=Column(Vector(1024)))
 
 
-class MoleculeCreate(MoleculeBase):
-    smiles: str
-    total_charge: int
-    total_multiplicity: int
-    qed: float | None = None
-    logp: float | None = None
-    morgan_fp3_1024: List[int] = Field(sa_column=Column(Vector(1024)))
-    rdkit_fp_1024: List[int] = Field(sa_column=Column(Vector(1024)))
-    atompair_fp_1024: List[int] = Field(sa_column=Column(Vector(1024)))
-    topological_torsion_fp_1024: List[int] = Field(sa_column=Column(Vector(1024)))
-
-
 class MoleculeOut(SQLModel):
     id: int
-    smiles: str
-    inchi: str
-    canonical_smiles: str
-    total_charge: int
-    total_multiplicity: int
-    qed: float | None = None
-    logp: float | None = None
+    smiles: str = Field(description="The SMILES string of the molecule")
+    inchi: str = Field(description="The InChI string of the molecule")
+    canonical_smiles: str = Field(
+        description="The canonical SMILES string of the molecule"
+    )
+    total_charge: int = Field(description="The total charge of the molecule")
+    total_multiplicity: int = Field(
+        description="The total multiplicity of the molecule"
+    )
+    qed: float | None = Field(
+        description="The Quantitative Estimation of Drug-likeness (QED) of the molecule",
+        default=None,
+    )
+    logp: float | None = Field(description="The LogP of the molecule", default=None)
 
-    formula: FormulaOut | None = None
+    formula: FormulaOut | None = Field(
+        description="The `Formula` of the molecule", default=None
+    )
 
-    commit_time: datetime
-    update_time: datetime
+    commit_time: datetime = Field(
+        description="The time when the data is committed to the database"
+    )
+    update_time: datetime = Field(description="The time when the data is last updated")
 
 
-class MoleculeUpdate(MoleculeCreate):
-    update_time: datetime = Field(default_factory=datetime.now)
+class MoleculeSDFOut(SQLModel):
+    smiles: str = Field(description="The SMILES string of the molecule")
+    sdf_block: str = Field(description="The 2D SDF block of the molecule")
+
+
+class MoleculesOut(SQLModel):
+    count: int = Field(description="The count of molecules in the query result")
+    data: list[MoleculeOut] = Field(
+        description="The list of `Molecule` objects in the query result"
+    )

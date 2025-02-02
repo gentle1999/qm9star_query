@@ -241,37 +241,19 @@ class SnapshotBase(SQLModel):
     is_error: bool = Field(default=False)
 
 
-class SnapshotCreate(SnapshotBase): ...
-
-
-class SnapshotUpdate(SnapshotBase):
-    # Molecule graph information, fully recoverable
-    coords: List[List[float]] | None = Field(
-        sa_column=Column(ARRAY(Float, dimensions=2)), default=None
-    )
-    atoms: List[int] | None = Field(sa_column=Column(ARRAY(Integer)), default=None)
-    bonds: List[List[int]] | None = Field(
-        sa_column=Column(ARRAY(Integer, dimensions=2), default=None)
-    )
-    formal_charges: List[int] | None = Field(
-        sa_column=Column(ARRAY(Integer)), default=None
-    )
-    formal_num_radicals: List[int] | None = Field(
-        sa_column=Column(ARRAY(Integer)), default=None
-    )
-
-    owner_id: int | None = None
-    update_time: datetime = Field(default_factory=datetime.now)
-
-
 class SnapshotOut(SnapshotBase):
     id: int
-    commit_time: datetime
-    update_time: datetime
+    commit_time: datetime = Field(description="The time when the data is first committed")
+    update_time: datetime = Field(description="The time when the data is last updated")
 
-    molecule: MoleculeOut
+    molecule: MoleculeOut = Field(description="The molecule this snapshot belongs to")
 
 
 class SnapshotSDFOut(SQLModel):
-    smiles: str
-    sdf_block: str
+    smiles: str = Field(description="The SMILES string of the snapshot")
+    sdf_block: str = Field(description="The 3D SDF block of the snapshot")
+
+
+class SnapshotsOut(SQLModel):
+    count: int = Field(description="The count of snapshots")
+    snapshots: List[SnapshotOut] = Field(description="The list of snapshots")
