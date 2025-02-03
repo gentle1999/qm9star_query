@@ -30,10 +30,10 @@ files = [
 name = "aiohttp"
 version = "3.9.5"
 description = "Async http client/server framework (asyncio)"
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "aiohttp-3.9.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:fcde4c397f673fdec23e6b05ebf8d4751314fa7c24f93334bf1f1364c1c69ac7"},
     {file = "aiohttp-3.9.5-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:5d6b3f1fabe465e819aed2c421a6743d8debbde79b6a8600739300630a01bf2c"},
@@ -128,10 +128,10 @@ speedups = ["Brotli", "aiodns", "brotlicffi"]
 name = "aiosignal"
 version = "1.3.1"
 description = "aiosignal: a list of registered asynchronous callbacks"
-optional = false
+optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "aiosignal-1.3.1-py3-none-any.whl", hash = "sha256:f8376fb07dd1e86a584e4fcdec80b36b7f81aac666ebc724e2c090300dd83b17"},
     {file = "aiosignal-1.3.1.tar.gz", hash = "sha256:54cd96e15e1649b75d6c87526a6ff0b6c1b0dd3459f43d9ca11d48c339b68cfc"},
@@ -298,10 +298,10 @@ test = ["astroid (>=1,<2)", "astroid (>=2,<4)", "pytest"]
 name = "async-timeout"
 version = "4.0.3"
 description = "Timeout context manager for asyncio programs"
-optional = false
+optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "python_version < \"3.11\""
+markers = "python_version < \"3.11\" and extra == \"dl\""
 files = [
     {file = "async-timeout-4.0.3.tar.gz", hash = "sha256:4640d96be84d82d02ed59ea2b7105a0f7b33abe8703703cd0ab0bf87c427522f"},
     {file = "async_timeout-4.0.3-py3-none-any.whl", hash = "sha256:7405140ff1230c310e51dc27b3145b9092d659ce68ff733fb0cefe3ee42be028"},
@@ -311,10 +311,10 @@ files = [
 name = "attrs"
 version = "23.2.0"
 description = "Classes Without Boilerplate"
-optional = false
+optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "attrs-23.2.0-py3-none-any.whl", hash = "sha256:99b87a485a5820b23b879f04c2305b44b951b502fd64be915879d77a7e8fc6f1"},
     {file = "attrs-23.2.0.tar.gz", hash = "sha256:935dc3b529c262f6cf76e50877d35a4bd3c1de194fd41f47a2b7ae8f19971f30"},
@@ -379,10 +379,10 @@ tutorials = ["flask", "ipython", "ipywidgets", "jupyter", "torchtext", "torchvis
 name = "certifi"
 version = "2024.2.2"
 description = "Python package for providing Mozilla's CA Bundle."
-optional = false
+optional = true
 python-versions = ">=3.6"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "certifi-2024.2.2-py3-none-any.whl", hash = "sha256:dc383c07b76109f368f6106eee2b593b04a011ea4d55f652c6ca24a754d1cdd1"},
     {file = "certifi-2024.2.2.tar.gz", hash = "sha256:0569859f95fc761b18b45ef421b1290a0f65f147e92a1e5eb3e635f9a5e4e66f"},
@@ -458,10 +458,10 @@ pycparser = "*"
 name = "charset-normalizer"
 version = "3.3.2"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
-optional = false
+optional = true
 python-versions = ">=3.7.0"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "charset-normalizer-3.3.2.tar.gz", hash = "sha256:f30c3cb33b24454a82faecaf01b19c18562b1e89558fb6c56de4d9118a032fd5"},
     {file = "charset_normalizer-3.3.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:25baf083bf6f6b341f4121c2f3c548875ee6f5339300e08be3f2b2ba1721cdd3"},
@@ -931,10 +931,10 @@ test = ["pytest (>=6.2.4,<7.0.0)"]
 name = "filelock"
 version = "3.14.0"
 description = "A platform independent file lock."
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "filelock-3.14.0-py3-none-any.whl", hash = "sha256:43339835842f110ca7ae60f1e1c160714c5a6afd15a2873419ab185334975c0f"},
     {file = "filelock-3.14.0.tar.gz", hash = "sha256:6ea72da3be9b8c82afd3edcf99f2fffbb5076335a5ae4d03248bb5b6c3eae78a"},
@@ -1016,10 +1016,10 @@ woff = ["brotli (>=1.0.1)", "brotlicffi (>=0.8.0)", "zopfli (>=0.1.4)"]
 name = "frozenlist"
 version = "1.4.1"
 description = "A list-like structure which implements collections.abc.MutableSequence"
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "frozenlist-1.4.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:f9aa1878d1083b276b0196f2dfbe00c9b7e752475ed3b682025ff20c1c1f51ac"},
     {file = "frozenlist-1.4.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:29acab3f66f0f24674b7dc4736477bcd4bc3ad4b896f5f45379a67bce8b96868"},
@@ -1104,10 +1104,10 @@ files = [
 name = "fsspec"
 version = "2024.5.0"
 description = "File-system specification"
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "fsspec-2024.5.0-py3-none-any.whl", hash = "sha256:e0fdbc446d67e182f49a70b82cf7889028a63588fde6b222521f10937b2b670c"},
     {file = "fsspec-2024.5.0.tar.gz", hash = "sha256:1d021b0b0f933e3b3029ed808eb400c08ba101ca2de4b3483fbc9ca23fcee94a"},
@@ -1458,10 +1458,10 @@ packaging = "*"
 name = "idna"
 version = "3.7"
 description = "Internationalized Domain Names in Applications (IDNA)"
-optional = false
+optional = true
 python-versions = ">=3.5"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version <= \"3.11\" and extra == \"api\" or python_version >= \"3.12\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"api\""
 files = [
     {file = "idna-3.7-py3-none-any.whl", hash = "sha256:82fee1fc78add43492d3a1898bfa6d8a904cc97d8427f683ed8e798d07761aa0"},
     {file = "idna-3.7.tar.gz", hash = "sha256:028ff3aadf0609c1fd278d8ea3089299412a7a8b9bd005dd08b9f8285bcb5cfc"},
@@ -1471,10 +1471,10 @@ files = [
 name = "intel-openmp"
 version = "2021.4.0"
 description = "Intel OpenMP* Runtime Library"
-optional = false
+optional = true
 python-versions = "*"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Windows\" or python_version >= \"3.12\" and platform_system == \"Windows\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" and platform_system == \"Windows\" or python_version >= \"3.12\" and extra == \"dl\" and platform_system == \"Windows\""
 files = [
     {file = "intel_openmp-2021.4.0-py2.py3-none-macosx_10_15_x86_64.macosx_11_0_x86_64.whl", hash = "sha256:41c01e266a7fdb631a7609191709322da2bbf24b252ba763f125dd651bcc7675"},
     {file = "intel_openmp-2021.4.0-py2.py3-none-manylinux1_i686.whl", hash = "sha256:3b921236a38384e2016f0f3d65af6732cf2c12918087128a9163225451e776f2"},
@@ -1583,10 +1583,10 @@ testing = ["Django", "attrs", "colorama", "docopt", "pytest (<7.0.0)"]
 name = "jinja2"
 version = "3.1.5"
 description = "A very fast and expressive template engine."
-optional = false
+optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version <= \"3.11\" and extra == \"api\" or python_version >= \"3.12\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"api\""
 files = [
     {file = "jinja2-3.1.5-py3-none-any.whl", hash = "sha256:aba0f4dc9ed8013c424088f68a5c226f7d6097ed89b246d7749c2ec4175c6adb"},
     {file = "jinja2-3.1.5.tar.gz", hash = "sha256:8fefff8dc3034e27bb80d67c671eb8a9bc424c0ef4c0826edbff304cceff43bb"},
@@ -1602,10 +1602,10 @@ i18n = ["Babel (>=2.7)"]
 name = "joblib"
 version = "1.4.2"
 description = "Lightweight pipelining with Python functions"
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "joblib-1.4.2-py3-none-any.whl", hash = "sha256:06d478d5674cbc267e7496a410ee875abd68e4340feff4490bcb7afb88060ae6"},
     {file = "joblib-1.4.2.tar.gz", hash = "sha256:2382c5816b2636fbd20a09e0f4e9dad4736765fdfb7dca582943b9c1366b3f0e"},
@@ -1859,10 +1859,10 @@ testing = ["coverage", "pyyaml"]
 name = "markupsafe"
 version = "2.1.5"
 description = "Safely add untrusted strings to HTML/XML markup."
-optional = false
+optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version <= \"3.11\" and extra == \"api\" or python_version >= \"3.12\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"api\""
 files = [
     {file = "MarkupSafe-2.1.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:a17a92de5231666cfbe003f0e4b9b3a7ae3afb1ec2845aadc2bacc93ff85febc"},
     {file = "MarkupSafe-2.1.5-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:72b6be590cc35924b02c78ef34b467da4ba07e4e0f0454a2c5907f473fc50ce5"},
@@ -2000,10 +2000,10 @@ traitlets = "*"
 name = "mkl"
 version = "2021.4.0"
 description = "Intel® oneAPI Math Kernel Library"
-optional = false
+optional = true
 python-versions = "*"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Windows\" or python_version >= \"3.12\" and platform_system == \"Windows\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" and platform_system == \"Windows\" or python_version >= \"3.12\" and extra == \"dl\" and platform_system == \"Windows\""
 files = [
     {file = "mkl-2021.4.0-py2.py3-none-macosx_10_15_x86_64.macosx_11_0_x86_64.whl", hash = "sha256:67460f5cd7e30e405b54d70d1ed3ca78118370b65f7327d495e9c8847705e2fb"},
     {file = "mkl-2021.4.0-py2.py3-none-manylinux1_i686.whl", hash = "sha256:636d07d90e68ccc9630c654d47ce9fdeb036bb46e2b193b3a9ac8cfea683cce5"},
@@ -2127,10 +2127,10 @@ files = [
 name = "mpmath"
 version = "1.3.0"
 description = "Python library for arbitrary-precision floating-point arithmetic"
-optional = false
+optional = true
 python-versions = "*"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "mpmath-1.3.0-py3-none-any.whl", hash = "sha256:a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c"},
     {file = "mpmath-1.3.0.tar.gz", hash = "sha256:7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f"},
@@ -2146,10 +2146,10 @@ tests = ["pytest (>=4.6)"]
 name = "multidict"
 version = "6.0.5"
 description = "multidict implementation"
-optional = false
+optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "multidict-6.0.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:228b644ae063c10e7f324ab1ab6b548bdf6f8b47f3ec234fef1093bc2735e5f9"},
     {file = "multidict-6.0.5-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:896ebdcf62683551312c30e20614305f53125750803b614e9e6ce74a96232604"},
@@ -2290,10 +2290,10 @@ files = [
 name = "networkx"
 version = "3.3"
 description = "Python package for creating and manipulating graphs and networks"
-optional = false
+optional = true
 python-versions = ">=3.10"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "networkx-3.3-py3-none-any.whl", hash = "sha256:28575580c6ebdaf4505b22c6256a2b9de86b316dc63ba9e93abde3d78dfdbcf2"},
     {file = "networkx-3.3.tar.gz", hash = "sha256:0c127d8b2f4865f59ae9cb8aafcd60b5c70f3241ebd66f7defad7c4ab90126c9"},
@@ -2410,10 +2410,10 @@ files = [
 name = "nvidia-cublas-cu12"
 version = "12.1.3.1"
 description = "CUBLAS native runtime libraries"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_cublas_cu12-12.1.3.1-py3-none-manylinux1_x86_64.whl", hash = "sha256:ee53ccca76a6fc08fb9701aa95b6ceb242cdaab118c3bb152af4e579af792728"},
     {file = "nvidia_cublas_cu12-12.1.3.1-py3-none-win_amd64.whl", hash = "sha256:2b964d60e8cf11b5e1073d179d85fa340c120e99b3067558f3cf98dd69d02906"},
@@ -2423,10 +2423,10 @@ files = [
 name = "nvidia-cuda-cupti-cu12"
 version = "12.1.105"
 description = "CUDA profiling tools runtime libs."
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_cuda_cupti_cu12-12.1.105-py3-none-manylinux1_x86_64.whl", hash = "sha256:e54fde3983165c624cb79254ae9818a456eb6e87a7fd4d56a2352c24ee542d7e"},
     {file = "nvidia_cuda_cupti_cu12-12.1.105-py3-none-win_amd64.whl", hash = "sha256:bea8236d13a0ac7190bd2919c3e8e6ce1e402104276e6f9694479e48bb0eb2a4"},
@@ -2436,10 +2436,10 @@ files = [
 name = "nvidia-cuda-nvrtc-cu12"
 version = "12.1.105"
 description = "NVRTC native runtime libraries"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_cuda_nvrtc_cu12-12.1.105-py3-none-manylinux1_x86_64.whl", hash = "sha256:339b385f50c309763ca65456ec75e17bbefcbbf2893f462cb8b90584cd27a1c2"},
     {file = "nvidia_cuda_nvrtc_cu12-12.1.105-py3-none-win_amd64.whl", hash = "sha256:0a98a522d9ff138b96c010a65e145dc1b4850e9ecb75a0172371793752fd46ed"},
@@ -2449,10 +2449,10 @@ files = [
 name = "nvidia-cuda-runtime-cu12"
 version = "12.1.105"
 description = "CUDA Runtime native Libraries"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_cuda_runtime_cu12-12.1.105-py3-none-manylinux1_x86_64.whl", hash = "sha256:6e258468ddf5796e25f1dc591a31029fa317d97a0a94ed93468fc86301d61e40"},
     {file = "nvidia_cuda_runtime_cu12-12.1.105-py3-none-win_amd64.whl", hash = "sha256:dfb46ef84d73fababab44cf03e3b83f80700d27ca300e537f85f636fac474344"},
@@ -2462,10 +2462,10 @@ files = [
 name = "nvidia-cudnn-cu12"
 version = "8.9.2.26"
 description = "cuDNN runtime libraries"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_cudnn_cu12-8.9.2.26-py3-none-manylinux1_x86_64.whl", hash = "sha256:5ccb288774fdfb07a7e7025ffec286971c06d8d7b4fb162525334616d7629ff9"},
 ]
@@ -2477,10 +2477,10 @@ nvidia-cublas-cu12 = "*"
 name = "nvidia-cufft-cu12"
 version = "11.0.2.54"
 description = "CUFFT native runtime libraries"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_cufft_cu12-11.0.2.54-py3-none-manylinux1_x86_64.whl", hash = "sha256:794e3948a1aa71fd817c3775866943936774d1c14e7628c74f6f7417224cdf56"},
     {file = "nvidia_cufft_cu12-11.0.2.54-py3-none-win_amd64.whl", hash = "sha256:d9ac353f78ff89951da4af698f80870b1534ed69993f10a4cf1d96f21357e253"},
@@ -2490,10 +2490,10 @@ files = [
 name = "nvidia-curand-cu12"
 version = "10.3.2.106"
 description = "CURAND native runtime libraries"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_curand_cu12-10.3.2.106-py3-none-manylinux1_x86_64.whl", hash = "sha256:9d264c5036dde4e64f1de8c50ae753237c12e0b1348738169cd0f8a536c0e1e0"},
     {file = "nvidia_curand_cu12-10.3.2.106-py3-none-win_amd64.whl", hash = "sha256:75b6b0c574c0037839121317e17fd01f8a69fd2ef8e25853d826fec30bdba74a"},
@@ -2503,10 +2503,10 @@ files = [
 name = "nvidia-cusolver-cu12"
 version = "11.4.5.107"
 description = "CUDA solver native runtime libraries"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_cusolver_cu12-11.4.5.107-py3-none-manylinux1_x86_64.whl", hash = "sha256:8a7ec542f0412294b15072fa7dab71d31334014a69f953004ea7a118206fe0dd"},
     {file = "nvidia_cusolver_cu12-11.4.5.107-py3-none-win_amd64.whl", hash = "sha256:74e0c3a24c78612192a74fcd90dd117f1cf21dea4822e66d89e8ea80e3cd2da5"},
@@ -2521,10 +2521,10 @@ nvidia-nvjitlink-cu12 = "*"
 name = "nvidia-cusparse-cu12"
 version = "12.1.0.106"
 description = "CUSPARSE native runtime libraries"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_cusparse_cu12-12.1.0.106-py3-none-manylinux1_x86_64.whl", hash = "sha256:f3b50f42cf363f86ab21f720998517a659a48131e8d538dc02f8768237bd884c"},
     {file = "nvidia_cusparse_cu12-12.1.0.106-py3-none-win_amd64.whl", hash = "sha256:b798237e81b9719373e8fae8d4f091b70a0cf09d9d85c95a557e11df2d8e9a5a"},
@@ -2537,10 +2537,10 @@ nvidia-nvjitlink-cu12 = "*"
 name = "nvidia-nccl-cu12"
 version = "2.20.5"
 description = "NVIDIA Collective Communication Library (NCCL) Runtime"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_nccl_cu12-2.20.5-py3-none-manylinux2014_aarch64.whl", hash = "sha256:1fc150d5c3250b170b29410ba682384b14581db722b2531b0d8d33c595f33d01"},
     {file = "nvidia_nccl_cu12-2.20.5-py3-none-manylinux2014_x86_64.whl", hash = "sha256:057f6bf9685f75215d0c53bf3ac4a10b3e6578351de307abad9e18a99182af56"},
@@ -2550,10 +2550,10 @@ files = [
 name = "nvidia-nvjitlink-cu12"
 version = "12.4.127"
 description = "Nvidia JIT LTO Library"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_nvjitlink_cu12-12.4.127-py3-none-manylinux2014_x86_64.whl", hash = "sha256:06b3b9b25bf3f8af351d664978ca26a16d2c5127dbd53c0497e28d1fb9611d57"},
     {file = "nvidia_nvjitlink_cu12-12.4.127-py3-none-win_amd64.whl", hash = "sha256:fd9020c501d27d135f983c6d3e244b197a7ccad769e34df53a42e276b0e25fa1"},
@@ -2563,10 +2563,10 @@ files = [
 name = "nvidia-nvtx-cu12"
 version = "12.1.105"
 description = "NVIDIA Tools Extension"
-optional = false
+optional = true
 python-versions = ">=3"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\" or python_version >= \"3.12\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "nvidia_nvtx_cu12-12.1.105-py3-none-manylinux1_x86_64.whl", hash = "sha256:dc21cf308ca5691e7c04d962e213f8a4aa9bbfa23d95412f452254c2caeb09e5"},
     {file = "nvidia_nvtx_cu12-12.1.105-py3-none-win_amd64.whl", hash = "sha256:65f4d98982b31b60026e0e6de73fbdfc09d08a96f4656dd3665ca616a11e1e82"},
@@ -3262,10 +3262,10 @@ typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 name = "pydantic-settings"
 version = "2.7.1"
 description = "Settings management using Pydantic"
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"api\" or python_version >= \"3.12\" and extra == \"api\""
 files = [
     {file = "pydantic_settings-2.7.1-py3-none-any.whl", hash = "sha256:590be9e6e24d06db33a4262829edef682500ef008565a969c73d39d5f8bfb3fd"},
     {file = "pydantic_settings-2.7.1.tar.gz", hash = "sha256:10c9caad35e64bfb3c2fbf70a078c0e25cc92499782e5200747f942a065dec93"},
@@ -3380,10 +3380,10 @@ vis = ["vtk (>=6.0.0)"]
 name = "pyparsing"
 version = "3.1.2"
 description = "pyparsing module - Classes and methods to define and execute parsing grammars"
-optional = false
+optional = true
 python-versions = ">=3.6.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "pyparsing-3.1.2-py3-none-any.whl", hash = "sha256:f9db75911801ed778fe61bb643079ff86601aca99fcae6345aa67292038fb742"},
     {file = "pyparsing-3.1.2.tar.gz", hash = "sha256:a1bac0ce561155ecc3ed78ca94d3c9378656ad4c94c1270de543f621420f94ad"},
@@ -3465,10 +3465,10 @@ six = ">=1.5"
 name = "python-dotenv"
 version = "1.0.1"
 description = "Read key-value pairs from a .env file and set them as environment variables"
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"api\" or python_version >= \"3.12\" and extra == \"api\""
 files = [
     {file = "python-dotenv-1.0.1.tar.gz", hash = "sha256:e324ee90a023d808f1959c46bcbc04446a10ced277783dc6ee09987c37ec10ca"},
     {file = "python_dotenv-1.0.1-py3-none-any.whl", hash = "sha256:f7b63ef50f1b690dddf550d03497b66d609393b40b564ed0d674909a68ebf16a"},
@@ -3773,10 +3773,10 @@ Pillow = "*"
 name = "requests"
 version = "2.31.0"
 description = "Python HTTP for Humans."
-optional = false
+optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "requests-2.31.0-py3-none-any.whl", hash = "sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f"},
     {file = "requests-2.31.0.tar.gz", hash = "sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1"},
@@ -3878,10 +3878,10 @@ files = [
 name = "scikit-learn"
 version = "1.4.2"
 description = "A set of python modules for machine learning and data mining"
-optional = false
+optional = true
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "scikit-learn-1.4.2.tar.gz", hash = "sha256:daa1c471d95bad080c6e44b4946c9390a4842adc3082572c20e4f8884e39e959"},
     {file = "scikit_learn-1.4.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:8539a41b3d6d1af82eb629f9c57f37428ff1481c1e34dddb3b9d7af8ede67ac5"},
@@ -3922,10 +3922,10 @@ tests = ["black (>=23.3.0)", "matplotlib (>=3.3.4)", "mypy (>=1.3)", "numpydoc (
 name = "scipy"
 version = "1.13.0"
 description = "Fundamental algorithms for scientific computing in Python"
-optional = false
+optional = true
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "scipy-1.13.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:ba419578ab343a4e0a77c0ef82f088238a93eef141b2b8017e46149776dfad4d"},
     {file = "scipy-1.13.0-cp310-cp310-macosx_12_0_arm64.whl", hash = "sha256:22789b56a999265431c417d462e5b7f2b487e831ca7bef5edeb56efe4c93f86e"},
@@ -4347,10 +4347,10 @@ full = ["httpx (>=0.27.0,<0.29.0)", "itsdangerous", "jinja2", "python-multipart 
 name = "sympy"
 version = "1.12"
 description = "Computer algebra system (CAS) in Python"
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "sympy-1.12-py3-none-any.whl", hash = "sha256:c3588cd4295d0c0f603d0f2ae780587e64e2efeedb3521e46b9bb1d08d184fa5"},
     {file = "sympy-1.12.tar.gz", hash = "sha256:ebf595c8dac3e0fdc4152c51878b498396ec7f30e7a914d6071e674d49420fb8"},
@@ -4379,10 +4379,10 @@ widechars = ["wcwidth"]
 name = "tbb"
 version = "2021.12.0"
 description = "Intel® oneAPI Threading Building Blocks (oneTBB)"
-optional = false
+optional = true
 python-versions = "*"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Windows\" or python_version >= \"3.12\" and platform_system == \"Windows\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" and platform_system == \"Windows\" or python_version >= \"3.12\" and extra == \"dl\" and platform_system == \"Windows\""
 files = [
     {file = "tbb-2021.12.0-py2.py3-none-manylinux1_i686.whl", hash = "sha256:f2cc9a7f8ababaa506cbff796ce97c3bf91062ba521e15054394f773375d81d8"},
     {file = "tbb-2021.12.0-py2.py3-none-manylinux1_x86_64.whl", hash = "sha256:a925e9a7c77d3a46ae31c34b0bb7f801c4118e857d137b68f68a8e458fcf2bd7"},
@@ -4448,10 +4448,10 @@ files = [
 name = "threadpoolctl"
 version = "3.5.0"
 description = "threadpoolctl"
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "threadpoolctl-3.5.0-py3-none-any.whl", hash = "sha256:56c1e26c150397e58c4926da8eeee87533b1e32bef131bd4bf6a2f45f3185467"},
     {file = "threadpoolctl-3.5.0.tar.gz", hash = "sha256:082433502dd922bf738de0d8bcc4fdcbf0979ff44c42bd40f5af8a282f6fa107"},
@@ -4461,10 +4461,10 @@ files = [
 name = "torch"
 version = "2.3.0"
 description = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
-optional = false
+optional = true
 python-versions = ">=3.8.0"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "torch-2.3.0-cp310-cp310-manylinux1_x86_64.whl", hash = "sha256:d8ea5a465dbfd8501f33c937d1f693176c9aef9d1c1b0ca1d44ed7b0a18c52ac"},
     {file = "torch-2.3.0-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:09c81c5859a5b819956c6925a405ef1cdda393c9d8a01ce3851453f699d3358c"},
@@ -4539,10 +4539,10 @@ url = "https://data.pyg.org/whl/torch-2.3.0%2Bcu121/torch_cluster-1.6.3%2Bpt23cu
 name = "torch-geometric"
 version = "2.5.3"
 description = "Graph Neural Network Library for PyTorch"
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "torch_geometric-2.5.3-py3-none-any.whl", hash = "sha256:8277abfc12600b0e8047e0c3ea2d55cc43f08c1448e73e924de827c15d0b5f85"},
     {file = "torch_geometric-2.5.3.tar.gz", hash = "sha256:ad0761650c8fa56cdc46ee61c564fd4995f07f079965fe732b3a76d109fd3edc"},
@@ -4693,10 +4693,10 @@ test = ["argcomplete (>=3.0.3)", "mypy (>=1.7.0)", "pre-commit", "pytest (>=7.0,
 name = "triton"
 version = "2.3.0"
 description = "A language and compiler for custom Deep Learning operations"
-optional = false
+optional = true
 python-versions = "*"
 groups = ["main"]
-markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\""
+markers = "python_version <= \"3.11\" and platform_system == \"Linux\" and platform_machine == \"x86_64\" and extra == \"dl\""
 files = [
     {file = "triton-2.3.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5ce4b8ff70c48e47274c66f269cce8861cf1dc347ceeb7a67414ca151b1822d8"},
     {file = "triton-2.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3c3d9607f85103afdb279938fc1dd2a66e4f5999a58eb48a346bd42738f986dd"},
@@ -4818,10 +4818,10 @@ tests = ["nose", "numpy"]
 name = "urllib3"
 version = "2.2.1"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
-optional = false
+optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "urllib3-2.2.1-py3-none-any.whl", hash = "sha256:450b20ec296a467077128bff42b73080516e71b56ff59a60a02bef2232c4fa9d"},
     {file = "urllib3-2.2.1.tar.gz", hash = "sha256:d0570876c61ab9e520d776c38acbbb5b05a776d3f9ff98a5c8fd5162a444cf19"},
@@ -5196,10 +5196,10 @@ files = [
 name = "yarl"
 version = "1.9.4"
 description = "Yet another URL library"
-optional = false
+optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+markers = "python_version <= \"3.11\" and extra == \"dl\" or python_version >= \"3.12\" and extra == \"dl\""
 files = [
     {file = "yarl-1.9.4-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:a8c1df72eb746f4136fe9a2e72b0c9dc1da1cbd23b5372f94b5820ff8ae30e0e"},
     {file = "yarl-1.9.4-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:a3a6ed1d525bfb91b3fc9b690c5a21bb52de28c018530ad85093cc488bee2dd2"},
@@ -5298,10 +5298,10 @@ idna = ">=2.0"
 multidict = ">=4.0"
 
 [extras]
-api = ["alembic", "fastapi", "fastapi-scheduler", "gunicorn", "jinja2", "python-multipart", "tenacity", "uvicorn"]
-dl = ["ase", "dive-into-graphs", "e3fp", "networkx", "nff", "pyg-lib", "pymatgen", "sympy", "tensorboard", "torch-cluster", "torch-scatter", "torch-sparse", "torch-spline-conv"]
+api = ["alembic", "fastapi", "fastapi-scheduler", "gunicorn", "jinja2", "pydantic-settings", "python-multipart", "tenacity", "uvicorn"]
+dl = ["ase", "dive-into-graphs", "e3fp", "networkx", "nff", "pyg-lib", "pymatgen", "sympy", "tensorboard", "torch", "torch-cluster", "torch-geometric", "torch-scatter", "torch-sparse", "torch-spline-conv"]
 
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "ae8f876ab478f0fad437717aa6e83788121732a2373e583d9c2fad89f41bf6e3"
+content-hash = "6bfad0cb111eafff3dbc6ad1f058a48c2111da614eef7454a3a2a8c0cc736797"

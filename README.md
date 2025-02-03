@@ -2,14 +2,15 @@
  * @Author: TMJ
  * @Date: 2024-04-29 09:59:49
  * @LastEditors: TMJ
- * @LastEditTime: 2025-02-02 23:04:51
+ * @LastEditTime: 2025-02-02 23:11:17
  * @Description: 请填写简介
 -->
+
 # qm9star_query
 
 A SQLModel-based repository dedicated to helping users access the PostgreSQL-based qm9star database more easily in a Python environment.
 
-This is a repository for paper *"[QM9star, two million DFT-computed equilibrium structures for ions and radicals with atomic information](https://www.nature.com/articles/s41597-024-03933-6)"*.
+This is a repository for paper _"[QM9star, two million DFT-computed equilibrium structures for ions and radicals with atomic information](https://www.nature.com/articles/s41597-024-03933-6)"_.
 
 ## Usage
 
@@ -46,7 +47,7 @@ poetry add https://data.pyg.org/whl/torch-2.3.0%2Bcu121.html # Use correct cuda 
 ### Failure Solution
 
 - DIG dependency conflict
-  
+
 The `DIG` package contains a dependency called `rdkit-pypi`, which may overwrite the original higher version of rdkit when installing, if you encounter this problem, you can use the following methods to solve it.
 
 ```bash
@@ -67,7 +68,21 @@ pip install .[dl] # If you want to use the dl functions
 
 ## API server
 
-This repository also provides a simple API server for accessing the QM9star database. You can start the server by running the following command
+This repository also provides a simple API server for accessing the QM9star database.
+
+First create an `.env` file in this folder with the following contents same as the configuration in the [1-download_and_deploy_qm9star](tutorial/1-download_and_deploy_qm9star.md):
+
+```env
+DOMAIN=127.0.0.1 # Change this to your domain name if needed
+PROJECT_NAME="qm9star" # Change this to your project name
+POSTGRES_SERVER=127.0.0.1 # Change this to your postgres server address
+POSTGRES_PORT=35432 # Change this to your postgres port
+POSTGRES_USER=hxchem # Change this to your postgres user
+POSTGRES_PASSWORD=hxchem # Change this to your postgres password
+POSTGRES_DB=qm9star # Change this to your postgres database name
+```
+
+Then you can start the server by running the following command:
 
 ```bash
 poetry install -E api
@@ -77,6 +92,8 @@ poetry run uvicorn qm9star_query.run_api_server:app --reload --port 8000 --host 
 You can then access the documentation of the API server at `http://localhost:8000/docs` to see the available endpoints and their parameters.
 
 ![API server documentation](image/README/api_doc.png)
+
+### Build API server docker image
 
 ## How to cite
 
