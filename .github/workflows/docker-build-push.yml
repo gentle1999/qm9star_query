@@ -1,0 +1,33 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [ "main" ]  # 触发分支
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write  # 允许推送镜像到 GHCR
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}  # 自动使用 GitHub Token
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .  # Dockerfile 所在目录
+          file: ./Dockerfile  
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/qm9star_api:latest
+            ghcr.io/${{ github.repository_owner }}/qm9star_api:${{ github.sha }}
