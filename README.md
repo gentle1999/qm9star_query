@@ -2,7 +2,7 @@
  * @Author: TMJ
  * @Date: 2024-04-29 09:59:49
  * @LastEditors: TMJ
- * @LastEditTime: 2025-02-04 13:32:16
+ * @LastEditTime: 2025-02-04 14:02:35
  * @Description: 请填写简介
 -->
 
@@ -12,7 +12,7 @@ A SQLModel-based repository dedicated to helping users access the PostgreSQL-bas
 
 This is a repository for paper _"[QM9star, two million DFT-computed equilibrium structures for ions and radicals with atomic information](https://www.nature.com/articles/s41597-024-03933-6)"_.
 
-## 2024.02 UPDATE Public API server is now available
+## 2025.02 UPDATE Public API server is now available
 
 Visit the [Online API server](#online-api-server) section to learn how to preview some data samples and run queries without self deployment.
 
