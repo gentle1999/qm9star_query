@@ -2,7 +2,7 @@
  * @Author: TMJ
  * @Date: 2024-04-29 09:59:49
  * @LastEditors: TMJ
- * @LastEditTime: 2025-02-02 23:11:17
+ * @LastEditTime: 2025-02-04 13:32:16
  * @Description: 请填写简介
 -->
 
@@ -11,6 +11,10 @@
 A SQLModel-based repository dedicated to helping users access the PostgreSQL-based qm9star database more easily in a Python environment.
 
 This is a repository for paper _"[QM9star, two million DFT-computed equilibrium structures for ions and radicals with atomic information](https://www.nature.com/articles/s41597-024-03933-6)"_.
+
+## 2024.02 UPDATE Public API server is now available
+
+Visit the [Online API server](#online-api-server) section to learn how to preview some data samples and run queries without self deployment.
 
 ## Usage
 
@@ -70,6 +74,14 @@ pip install .[dl] # If you want to use the dl functions
 
 This repository also provides a simple API server for accessing the QM9star database.
 
+### Online API server
+
+The online API server is available at [https://star.asymcatml.net](https://star.asymcatml.net). You can access the documentation of the API server at [https://star.asymcatml.net/docs](https://star.asymcatml.net/docs)
+
+![API server documentation](image/README/api_doc.png)
+
+### Self-host API server
+
 First create an `.env` file in this folder with the following contents same as the configuration in the [1-download_and_deploy_qm9star](tutorial/1-download_and_deploy_qm9star.md):
 
 ```env
@@ -91,9 +103,15 @@ poetry run uvicorn qm9star_query.run_api_server:app --reload --port 8000 --host 
 
 You can then access the documentation of the API server at `http://localhost:8000/docs` to see the available endpoints and their parameters.
 
-![API server documentation](image/README/api_doc.png)
-
 ### Build API server docker image
+
+To build the API server docker image, you can run the following command:
+
+```bash
+docker build -t qm9star_query_api .
+```
+
+Lateset official docker image is available on [GHCR](https://github.com/users/gentle1999/packages/container/package/qm9star_api).
 
 ## How to cite
 
