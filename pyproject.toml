@@ -47,6 +47,7 @@ gunicorn = { version = "^23.0.0", optional = true }
 jinja2 = { version = "^3.1.5", optional = true }
 alembic = { version = "^1.14.1", optional = true }
 pydantic-settings = { version = "^2.7.1", optional = true }
+email-validator = { version = "^2.2.0", optional = true }
 
 [tool.poetry.extras]
 dl = [
@@ -76,6 +77,7 @@ api = [
     "jinja2",
     "alembic",
     "pydantic-settings",
+    "email-validator"
 ]
 
 [build-system]
