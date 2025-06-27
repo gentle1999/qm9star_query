@@ -9,7 +9,7 @@ from qm9star_query.api.deps import SessionDep
 from qm9star_query.crud import molecules_crud, snapshots_crud
 from qm9star_query.models import Molecule, Snapshot
 from qm9star_query.models.snapshot import SnapshotOut, SnapshotSDFOut, SnapshotsOut
-from qm9star_query.models.utils import ItemCount,  SnapshotFilter
+from qm9star_query.models.utils import ItemCount, SnapshotFilter
 from qm9star_query.utils import recover_rdmol_from_snapshot
 
 router = APIRouter()
@@ -64,8 +64,10 @@ def read_snapshots(
     """
     statement = select(Snapshot).offset(skip).limit(limit)
     snapshots = session.exec(statement).all()
-
-    return SnapshotsOut(snapshots=snapshots, count=len(snapshots))
+    return SnapshotsOut(
+        snapshots=[SnapshotOut.model_validate(snap) for snap in snapshots],
+        count=len(snapshots),
+    )
 
 
 @router.get("/smiles/", response_model=SnapshotsOut)
@@ -104,7 +106,10 @@ def read_snapshots_by_smiles(
         skip=skip,
         limit=limit,
     )
-    return SnapshotsOut(snapshots=db_snapshots, count=len(db_snapshots))
+    return SnapshotsOut(
+        snapshots=[SnapshotOut.model_validate(snap) for snap in db_snapshots],
+        count=len(db_snapshots),
+    )
 
 
 @router.get("/smiles_strict/", response_model=SnapshotsOut)
@@ -117,7 +122,10 @@ def read_snapshots_by_smiles_strict_match(
     db_molecule = molecules_crud.get_molecule_by_smiles(session=session, smiles=smiles)
     if db_molecule:
         return SnapshotsOut(
-            snapshots=db_molecule.snapshots, count=len(db_molecule.snapshots)
+            snapshots=[
+                SnapshotOut.model_validate(snap) for snap in db_molecule.snapshots
+            ],
+            count=len(db_molecule.snapshots),
         )
     else:
         raise HTTPException(status_code=404, detail="Molecule not found")
@@ -126,7 +134,7 @@ def read_snapshots_by_smiles_strict_match(
 @router.post("/filter/", response_model=SnapshotsOut)
 def read_molecules_by_filter(
     session: SessionDep,
-    filters: SnapshotFilter = None,
+    filters: SnapshotFilter | None = None,
     skip: int = 0,
     limit: int = 5,
 ) -> SnapshotsOut:
@@ -141,4 +149,7 @@ def read_molecules_by_filter(
         skip=skip,
         limit=limit,
     )
-    return SnapshotsOut(snapshots=db_snapshots, count=len(db_snapshots))
+    return SnapshotsOut(
+        snapshots=[SnapshotOut.model_validate(snap) for snap in db_snapshots],
+        count=len(db_snapshots),
+    )

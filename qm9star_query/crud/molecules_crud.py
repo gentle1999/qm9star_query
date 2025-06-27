@@ -1,23 +1,21 @@
 from typing import Literal, Sequence
 
+from sqlmodel import Session, col, func, select
+
 from qm9star_query.models import Formula, Molecule
-from qm9star_query.models.utils import MoleculeFilter, ItemCount
-from qm9star_query.utils import (
-    elements_in_pt,
-    smi_to_embedding,
-    smiles_to_formula_dict,
-)
-from sqlmodel import Session, select, func
+from qm9star_query.models.utils import ItemCount, MoleculeFilter
+from qm9star_query.utils import elements_in_pt, smi_to_embedding, smiles_to_formula_dict
 
 
-def get_molecule_by_id(*, session: Session, molecule_id: int) -> Molecule:
+def get_molecule_by_id(*, session: Session, molecule_id: int) -> Molecule | None:
     return session.get(Molecule, molecule_id)
 
-def get_molecule_ids(*, session: Session) -> Sequence[int]:
+
+def get_molecule_ids(*, session: Session) -> Sequence[int] | Sequence[None]:
     return session.exec(select(Molecule.id)).all()
 
 
-def get_molecule_by_smiles(*, session: Session, smiles: str) -> Molecule:
+def get_molecule_by_smiles(*, session: Session, smiles: str) -> Molecule | None:
     formula_dict = smiles_to_formula_dict(smiles)
     formula_str = "".join(
         [f"{symbol}{element}" for symbol, element in formula_dict.items()]
@@ -65,7 +63,7 @@ def get_molecules_by_smiles(
 def get_molecules_by_conditions(
     *,
     session: Session,
-    molecule_filter: MoleculeFilter = None,
+    molecule_filter: MoleculeFilter | None = None,
     skip: int = 0,
     limit: int = 100,
 ) -> Sequence[Molecule]:
@@ -116,9 +114,10 @@ def get_molecules_by_conditions(
                 query = query.order_by(fp.max_inner_product(embedding))
             elif distance == "cosine":
                 query = query.order_by(fp.cosine_distance(embedding))
-    statement = query.offset(skip).limit(limit).order_by(Molecule.id)
+    statement = query.offset(skip).limit(limit).order_by(col(Molecule.id))
     db_molecules = session.exec(statement).all()
     return db_molecules
+
 
 def get_molecule_count(*, session: Session) -> ItemCount:
     count_statement = select(func.count()).select_from(Molecule)

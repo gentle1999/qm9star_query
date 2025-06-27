@@ -33,15 +33,18 @@ numeric_cols = (
     "spin_square",
 )
 
-def get_snapshot_ids(*, session: Session) -> Sequence[int]:
+
+def get_snapshot_ids(*, session: Session) -> Sequence[int] | Sequence[None]:
     return session.exec(select(Snapshot.id)).all()
 
 
-def get_snapshot_by_id(*, session: Session, snapshot_id: int) -> Snapshot:
+def get_snapshot_by_id(*, session: Session, snapshot_id: int) -> Snapshot | None:
     return session.get(Snapshot, snapshot_id)
 
 
-def get_snapshot_by_smiles_hash(*, session: Session, smiles: str, snapshot_hash: str):
+def get_snapshot_by_smiles_hash(
+    *, session: Session, smiles: str, snapshot_hash: str
+) -> Snapshot | None:
     formula_dict = smiles_to_formula_dict(smiles)
     formula_str = "".join(
         [f"{symbol}{element}" for symbol, element in formula_dict.items()]
@@ -60,7 +63,7 @@ def get_snapshot_by_smiles_hash(*, session: Session, smiles: str, snapshot_hash:
 def get_snapshots_by_conditions(
     *,
     session: Session,
-    snapshot_filter: SnapshotFilter = None,
+    snapshot_filter: SnapshotFilter | None = None,
     skip: int = 0,
     limit: int = 100,
 ) -> Sequence[Snapshot]:
@@ -128,7 +131,7 @@ def get_snapshots_by_conditions(
                 query = query.order_by(fp.max_inner_product(embedding))
             elif distance == "cosine":
                 query = query.order_by(fp.cosine_distance(embedding))
-    statement = query.offset(skip).limit(limit).order_by(Snapshot.id)
+    statement = query.offset(skip).limit(limit).order_by(col(Snapshot.id))
     return session.exec(statement).all()
 
 

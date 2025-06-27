@@ -72,10 +72,10 @@ class MoleculeFilter(SQLModel):
     smiles: str | None = Field(
         description="SMILES string, excute slow vector search if not None", default=None
     )
-    method: Literal["morgan", "rdk", "atompair", "torsion"] = Field(
+    method: Literal["morgan", "rdk", "atompair", "torsion"] | None = Field(
         description="fingerprint method", default="morgan"
     )
-    distance: Literal["l2", "inner_product", "cosine"] = Field(
+    distance: Literal["l2", "inner_product", "cosine"] | None = Field(
         description="distance metric", default="cosine"
     )
     numeric_filters: List[NumericFilter] = Field(
@@ -126,10 +126,10 @@ class SnapshotFilter(SQLModel):
     smiles: str | None = Field(
         description="SMILES string, excute slow vector search if not None", default=None
     )
-    method: Literal["morgan", "rdk", "atompair", "torsion"] = Field(
+    method: Literal["morgan", "rdk", "atompair", "torsion"] | None = Field(
         description="fingerprint method", default="morgan"
     )
-    distance: Literal["l2", "inner_product", "cosine"] = Field(
+    distance: Literal["l2", "inner_product", "cosine"] | None = Field(
         description="distance metric", default="cosine"
     )
 

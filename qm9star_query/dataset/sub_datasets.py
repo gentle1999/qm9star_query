@@ -32,7 +32,7 @@ class NeutralQM9starDataset(BaseQM9starDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
-        selector_func: Callable = None,
+        selector_func: Callable | None = None,
         log=False,
     ):
         super().__init__(
@@ -76,7 +76,7 @@ class CationQM9starDataset(BaseQM9starDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
-        selector_func: Callable = None,
+        selector_func: Callable | None = None,
         log=False,
     ):
         super().__init__(
@@ -120,7 +120,7 @@ class AnionQM9starDataset(BaseQM9starDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
-        selector_func: Callable = None,
+        selector_func: Callable | None = None,
         log=False,
     ):
         super().__init__(
@@ -164,7 +164,7 @@ class RadicalQM9starDataset(BaseQM9starDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
-        selector_func: Callable = None,
+        selector_func: Callable | None = None,
         log=False,
     ):
         super().__init__(

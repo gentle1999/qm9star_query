@@ -71,7 +71,7 @@ class BaseQM9starDataset(InMemoryDataset):
         transform=transform_data,
         pre_transform=None,
         pre_filter=None,
-        selector_func: Callable = None,
+        selector_func: Callable | None = None,
         log=False,
     ):
         self.dataset_name = dataset_name
@@ -133,13 +133,13 @@ class BaseQM9starDataset(InMemoryDataset):
 
     def get_db_ids(self) -> list[np.ndarray]:
         total_ids = self.session.exec(
-            self.db_select(select(Snapshot.id)).order_by(Snapshot.id)
+            self.db_select(select(col(Snapshot.id))).order_by(col(Snapshot.id))
         ).all()
         assert len(total_ids) > 0, "No data found in database"
         assert (
             len(total_ids) >= 2 * self.block_num
         ), "No enough data to split, try smaller block_num"
-        self.db_ids = np.array_split(total_ids, len(self.names))
+        self.db_ids = np.array_split(np.array(total_ids), len(self.names))
         return self.db_ids
 
     def get_data(self, snapshot_ids: list[int], chunk_idx):
@@ -150,7 +150,7 @@ class BaseQM9starDataset(InMemoryDataset):
             for snapshot in tqdm(
                 self.session.exec(
                     select(Snapshot)
-                    .order_by(Snapshot.id)
+                    .order_by(col(Snapshot.id))
                     .where(col(Snapshot.id).in_(snapshot_ids))
                 ).all(),
                 desc=f"Downloading data {self.dataset_name} chunk {chunk_idx:02d}",
@@ -172,8 +172,10 @@ class BaseQM9starDataset(InMemoryDataset):
 
     @staticmethod
     def db_select(
-        selector=select(Snapshot),
-    ) -> SelectOfScalar[int] | SelectOfScalar[Snapshot]:
+        selector: SelectOfScalar[int | Snapshot | None] = select(
+            Snapshot
+        ),
+    ) -> SelectOfScalar[int | Snapshot | None]:
         return selector
 
     def get_rdmol(self, index: int):

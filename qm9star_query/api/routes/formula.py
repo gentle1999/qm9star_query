@@ -1,13 +1,22 @@
+"""
+Author: TMJ
+Date: 2025-02-02 16:35:58
+LastEditors: TMJ
+LastEditTime: 2025-06-27 21:20:24
+Description: 请填写简介
+"""
+
 import os
 from typing import Any, List, Literal
+
+from fastapi import APIRouter, HTTPException
+from sqlmodel import column, func, select
 
 from qm9star_query.api.deps import SessionDep
 from qm9star_query.crud import formulas_crud
 from qm9star_query.models import Formula
 from qm9star_query.models.formula import FormulaOut, FormulasOut
-from qm9star_query.models.utils import ItemCount, FormulaFilter
-from fastapi import APIRouter, HTTPException
-from sqlmodel import column, func, select
+from qm9star_query.models.utils import FormulaFilter, ItemCount
 
 router = APIRouter()
 
@@ -43,18 +52,21 @@ def read_formulas(session: SessionDep, skip: int = 0, limit: int = 100) -> Any:
     statement = select(Formula).offset(skip).limit(limit)
     formulas = session.exec(statement).all()
 
-    return FormulasOut(data=formulas, count=len(formulas))
+    return FormulasOut(
+        data=[FormulaOut.model_validate(formula) for formula in formulas],
+        count=len(formulas),
+    )
 
 
 @router.post("/filter/", response_model=FormulasOut)
 def read_formulas_by_filter(
     session: SessionDep,
-    filters: FormulaFilter = None,
+    filters: FormulaFilter | None = None,
     skip: int = 0,
     limit: int = 100,
 ) -> Any:
     """
-    Retrieve formulas by filter. 
+    Retrieve formulas by filter.
 
     Detailed filters setting can be found in the schema of `FormulaFilter`.
     """
@@ -64,6 +76,7 @@ def read_formulas_by_filter(
         skip=skip,
         limit=limit,
     )
-    return FormulasOut(data=formulas, count=len(formulas))
-
-
+    return FormulasOut(
+        data=[FormulaOut.model_validate(formula) for formula in formulas],
+        count=len(formulas),
+    )

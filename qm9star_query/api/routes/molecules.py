@@ -59,7 +59,9 @@ def read_molecules(session: SessionDep, skip: int = 0, limit: int = 100) -> Any:
     statement = select(Molecule).offset(skip).limit(limit)
     molecules = session.exec(statement).all()
 
-    return MoleculesOut(data=molecules, count=len(molecules))
+    return MoleculesOut(
+        data=[MoleculeOut.model_validate(m) for m in molecules], count=len(molecules)
+    )
 
 
 @router.get("/smiles/", response_model=MoleculesOut)
@@ -87,7 +89,10 @@ def read_molecules_by_smiles(
         skip=skip,
         limit=limit,
     )
-    return MoleculesOut(data=db_molecules, count=len(db_molecules))
+    return MoleculesOut(
+        data=[MoleculeOut.model_validate(m) for m in db_molecules],
+        count=len(db_molecules),
+    )
 
 
 @router.get("/smiles_strict/", response_model=MoleculeOut)
@@ -98,9 +103,7 @@ def read_molecule_by_smiles_strict_match(
     """
     Precise search through SMILES
     """
-    db_molecule = molecules_crud.get_molecule_by_smiles(
-        session=session, smiles=smiles
-    )
+    db_molecule = molecules_crud.get_molecule_by_smiles(session=session, smiles=smiles)
     if not db_molecule:
         raise HTTPException(status_code=404, detail="Molecule not found")
     return MoleculeOut.model_validate(db_molecule)
@@ -109,7 +112,7 @@ def read_molecule_by_smiles_strict_match(
 @router.post("/filter/", response_model=MoleculesOut)
 def read_molecules_by_filter(
     session: SessionDep,
-    filters: MoleculeFilter = None,
+    filters: MoleculeFilter | None = None,
     skip: int = 0,
     limit: int = 100,
 ) -> MoleculesOut:
@@ -124,4 +127,7 @@ def read_molecules_by_filter(
         skip=skip,
         limit=limit,
     )
-    return MoleculesOut(data=session_molecules, count=len(session_molecules))
+    return MoleculesOut(
+        data=[MoleculeOut.model_validate(m) for m in session_molecules],
+        count=len(session_molecules),
+    )
